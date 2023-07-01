@@ -1,13 +1,13 @@
-import { Fragment } from 'react';
+import {} from 'react';
 import config from '../gitprofile.config';
 import Home from './components/Home';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Project } from './components/Projects/project/Project';
-import { AllProjects } from './components/Projects/all-projects/AllProjects';
+import { AllProjects } from './components/Projects/all-projects';
 
 function App() {
   return (
-    <Fragment>
+    <>
       <div>
         <Routes>
           <Route path="/projects/:id" element={<Project config={config} />} />
@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<Home config={config} />} />
         </Routes>
       </div>
-    </Fragment>
+    </>
   );
 }
 

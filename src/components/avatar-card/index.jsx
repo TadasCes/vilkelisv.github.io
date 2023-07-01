@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { fallbackImage, skeleton } from '../../helpers/utils';
 import LazyImage from '../lazy-image';
+import { Card } from '../layout/card';
 
 const AvatarCard = ({ profile, loading, avatarRing, resume }) => {
   return (
-    <div className="card shadow-lg compact bg-base-100">
+    <Card>
       <div className="grid place-items-center py-8">
         {loading || !profile ? (
           <div className="avatar opacity-90">
@@ -72,7 +73,7 @@ const AvatarCard = ({ profile, loading, avatarRing, resume }) => {
             </a>
           ))}
       </div>
-    </div>
+    </Card>
   );
 };
 

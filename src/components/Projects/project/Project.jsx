@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   genericError,
@@ -144,7 +144,7 @@ export const Project = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
@@ -176,7 +176,7 @@ export const Project = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

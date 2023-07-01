@@ -24,8 +24,13 @@ const config = {
     skype: '',
     telegram: '',
     website: '',
-    phone: '',
+    phone: '+37062341300',
     email: 'vilkelis.vainius@gmail.com',
+  },
+  about: {
+    who: 'Hello, I am full-stack developer.',
+    story:
+      'I have always been a creative person, interested in art, design, illustration, photography and code.',
   },
   resume: {
     fileUrl: '', // Empty fileUrl will hide the `Download Resume` button.
@@ -84,25 +89,39 @@ const config = {
   // To hide the `My Projects` section, keep it empty.
   externalProjects: [
     {
-      title: 'Project Name',
+      title: 'Project Name 1',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
       imageUrl: 'https://via.placeholder.com/250x250',
-      link: 'https://example.com',
+      link: '/projects/1',
     },
     {
-      title: 'Project Name',
+      title: 'Project Name 2',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
       imageUrl: 'https://via.placeholder.com/250x250',
-      link: 'https://example.com',
+      link: '/projects/2',
     },
     {
-      title: 'Project Name',
+      title: 'Project Name 3',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
       imageUrl: 'https://via.placeholder.com/250x250',
-      link: 'https://example.com',
+      link: '/projects/3',
+    },
+    {
+      title: 'Project Name 4',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+      imageUrl: 'https://via.placeholder.com/250x250',
+      link: '/projects/4',
+    },
+    {
+      title: 'Project Name 5',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+      imageUrl: 'https://via.placeholder.com/250x250',
+      link: '/projects/5',
     },
   ],
   // Display blog posts from your medium or dev account. (Optional)

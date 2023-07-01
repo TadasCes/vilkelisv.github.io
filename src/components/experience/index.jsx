@@ -1,6 +1,7 @@
 import { skeleton } from '../../helpers/utils';
-import { Fragment } from 'react';
+import {} from 'react';
 import PropTypes from 'prop-types';
+import { Card } from '../layout/card';
 
 const ListItem = ({ time, position, company, companyLink }) => (
   <li className="mb-5 ml-4">
@@ -44,42 +45,38 @@ const Experience = ({ experiences, loading }) => {
   return (
     <>
       {experiences?.length !== 0 && (
-        <div className="card shadow-lg compact bg-base-100">
-          <div className="card-body">
-            <div className="mx-3">
-              <h5 className="card-title">
-                {loading ? (
-                  skeleton({ width: 'w-32', height: 'h-8' })
-                ) : (
-                  <span className="text-base-content opacity-70">
-                    Experience
-                  </span>
-                )}
-              </h5>
-            </div>
-            <div className="text-base-content text-opacity-60">
-              <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-                {loading ? (
-                  renderSkeleton()
-                ) : (
-                  <Fragment>
-                    {experiences.map((experience, index) => (
-                      <ListItem
-                        key={index}
-                        time={`${experience.from} - ${experience.to}`}
-                        position={experience.position}
-                        company={experience.company}
-                        companyLink={
-                          experience.companyLink ? experience.companyLink : null
-                        }
-                      />
-                    ))}
-                  </Fragment>
-                )}
-              </ol>
-            </div>
+        <Card>
+          <div className="mx-3">
+            <h5 className="card-title">
+              {loading ? (
+                skeleton({ width: 'w-32', height: 'h-8' })
+              ) : (
+                <span className="text-base-content opacity-70">Experience</span>
+              )}
+            </h5>
           </div>
-        </div>
+          <div className="text-base-content text-opacity-60">
+            <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
+              {loading ? (
+                renderSkeleton()
+              ) : (
+                <>
+                  {experiences.map((experience, index) => (
+                    <ListItem
+                      key={index}
+                      time={`${experience.from} - ${experience.to}`}
+                      position={experience.position}
+                      company={experience.company}
+                      companyLink={
+                        experience.companyLink ? experience.companyLink : null
+                      }
+                    />
+                  ))}
+                </>
+              )}
+            </ol>
+          </div>
+        </Card>
       )}
     </>
   );

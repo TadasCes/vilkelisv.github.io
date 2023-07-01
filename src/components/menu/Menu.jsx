@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './style.css';
 export const Menu = () => {
   return (
-    <Fragment>
+    <>
       <div className="h-20 bg-gray-100 grid grid-cols-2">
         <div className="col-span-1 flex items-center justify-start ml-10">
           <div className="flex">
@@ -21,6 +21,6 @@ export const Menu = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };

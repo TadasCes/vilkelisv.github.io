@@ -156,6 +156,10 @@ export const sanitizeConfig = (config) => {
         projects: config?.github?.exclude?.projects || [],
       },
     },
+    about: {
+      who: config?.about?.who,
+      story: config?.about?.story,
+    },
     social: {
       linkedin: config?.social?.linkedin,
       twitter: config?.social?.twitter,

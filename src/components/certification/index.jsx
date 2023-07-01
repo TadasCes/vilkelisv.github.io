@@ -1,6 +1,7 @@
 import { skeleton } from '../../helpers/utils';
-import { Fragment } from 'react';
+import {} from 'react';
 import PropTypes from 'prop-types';
+import { Card } from '../layout/card';
 
 const ListItem = ({ year, name, body, link }) => (
   <li className="mb-5 ml-4">
@@ -45,40 +46,38 @@ const Certification = ({ certifications, loading }) => {
   return (
     <>
       {certifications?.length !== 0 && (
-        <div className="card shadow-lg compact bg-base-100">
-          <div className="card-body">
-            <div className="mx-3">
-              <h5 className="card-title">
-                {loading ? (
-                  skeleton({ width: 'w-32', height: 'h-8' })
-                ) : (
-                  <span className="text-base-content opacity-70">
-                    Certification
-                  </span>
-                )}
-              </h5>
-            </div>
-            <div className="text-base-content text-opacity-60">
-              <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-                {loading ? (
-                  renderSkeleton()
-                ) : (
-                  <Fragment>
-                    {certifications.map((certification, index) => (
-                      <ListItem
-                        key={index}
-                        year={`${certification.year}`}
-                        name={certification.name}
-                        body={certification.body}
-                        link={certification.link ? certification.link : null}
-                      />
-                    ))}
-                  </Fragment>
-                )}
-              </ol>
-            </div>
+        <Card>
+          <div className="mx-3">
+            <h5 className="card-title">
+              {loading ? (
+                skeleton({ width: 'w-32', height: 'h-8' })
+              ) : (
+                <span className="text-base-content opacity-70">
+                  Certification
+                </span>
+              )}
+            </h5>
           </div>
-        </div>
+          <div className="text-base-content text-opacity-60">
+            <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
+              {loading ? (
+                renderSkeleton()
+              ) : (
+                <>
+                  {certifications.map((certification, index) => (
+                    <ListItem
+                      key={index}
+                      year={`${certification.year}`}
+                      name={certification.name}
+                      body={certification.body}
+                      link={certification.link ? certification.link : null}
+                    />
+                  ))}
+                </>
+              )}
+            </ol>
+          </div>
+        </Card>
       )}
     </>
   );

@@ -9,7 +9,7 @@ export const BtnNavigate = ({ title, destinationUrl }) => {
       <BtnSkeleton
         title={title}
         onClick={() => <Navigate to={destinationUrl} />}
-        style="text-white hover:text-blue-500 bg-blue-500 hover:bg-transparent hover:border-blue-500"
+        style="text-white w-fit hover:text-blue-500 bg-blue-500 hover:bg-transparent hover:border-blue-500"
       />
     </>
   );

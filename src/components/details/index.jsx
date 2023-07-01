@@ -7,7 +7,7 @@ import {
 import { SiTwitter } from 'react-icons/si';
 import { CgDribbble } from 'react-icons/cg';
 import { RiPhoneFill, RiMailFill } from 'react-icons/ri';
-import { Fragment } from 'react';
+import {} from 'react';
 import {
   FaBehanceSquare,
   FaBuilding,
@@ -22,6 +22,7 @@ import {
 } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { skeleton } from '../../helpers/utils';
+import { Card } from '../layout/card';
 
 const isCompanyMention = (company) => {
   return company.startsWith('@') && !company.includes(' ');
@@ -47,7 +48,7 @@ const ListItem = ({ icon, title, value, link, skeleton = false }) => {
       href={link}
       target="_blank"
       rel="noreferrer"
-      className="flex justify-start py-2 px-1 items-center"
+      className="flex justify-start px-1 items-center"
     >
       <div className="flex-grow font-medium gap-2 flex items-center my-1">
         {icon} {title}
@@ -65,8 +66,7 @@ const ListItem = ({ icon, title, value, link, skeleton = false }) => {
     </a>
   );
 };
-
-const Details = ({ profile, loading, social, github }) => {
+const Details = ({ about, profile, loading, social, github }) => {
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 4; index++) {
@@ -85,168 +85,78 @@ const Details = ({ profile, loading, social, github }) => {
   };
 
   return (
-    <div className="card shadow-lg compact bg-base-100">
-      <div className="card-body">
-        <div className="text-base-content text-opacity-60">
-          {loading || !profile ? (
-            renderSkeleton()
-          ) : (
-            <Fragment>
-              {profile.location && (
-                <ListItem
-                  icon={<MdLocationOn />}
-                  title="Based in:"
-                  value={profile.location}
-                />
-              )}
-              {profile.company && (
-                <ListItem
-                  icon={<FaBuilding />}
-                  title="Company:"
-                  value={profile.company}
-                  link={
-                    isCompanyMention(profile.company.trim())
-                      ? companyLink(profile.company.trim())
-                      : null
-                  }
-                />
-              )}
+    <Card>
+      <div className="text-base-content text-opacity-60">
+        {loading || !profile ? (
+          renderSkeleton()
+        ) : (
+          <>
+            <div className="text-base-content opacity-70">
+              <span className="text-2xl font-semibold">About me</span>
+            </div>
+            <div>
+              <span>{about.who}</span>
+              <br />
+              <span>{about.story}</span>
+            </div>
+            {profile.location && (
               <ListItem
-                icon={<AiFillGithub />}
-                title="GitHub:"
-                value={github.username}
-                link={`https://github.com/${github.username}`}
+                icon={<MdLocationOn />}
+                title="Based in:"
+                value={profile.location}
               />
-              {social?.twitter && (
-                <ListItem
-                  icon={<SiTwitter />}
-                  title="Twitter:"
-                  value={social.twitter}
-                  link={`https://twitter.com/${social.twitter}`}
-                />
-              )}
-              {social?.mastodon && (
-                <ListItem
-                  icon={<FaMastodon />}
-                  title="Mastodon:"
-                  value={getFormattedMastodonValue(social.mastodon, false)}
-                  link={getFormattedMastodonValue(social.mastodon, true)}
-                />
-              )}
-              {social?.linkedin && (
-                <ListItem
-                  icon={<FaLinkedin />}
-                  title="LinkedIn:"
-                  value={social.linkedin}
-                  link={`https://www.linkedin.com/in/${social.linkedin}`}
-                />
-              )}
-              {social?.dribbble && (
-                <ListItem
-                  icon={<CgDribbble />}
-                  title="Dribbble:"
-                  value={social.dribbble}
-                  link={`https://dribbble.com/${social.dribbble}`}
-                />
-              )}
-              {social?.behance && (
-                <ListItem
-                  icon={<FaBehanceSquare />}
-                  title="Behance:"
-                  value={social.behance}
-                  link={`https://www.behance.net/${social.behance}`}
-                />
-              )}
-              {social?.facebook && (
-                <ListItem
-                  icon={<FaFacebook />}
-                  title="Facebook:"
-                  value={social.facebook}
-                  link={`https://www.facebook.com/${social.facebook}`}
-                />
-              )}
-              {social?.instagram && (
-                <ListItem
-                  icon={<AiFillInstagram />}
-                  title="Instagram:"
-                  value={social.instagram}
-                  link={`https://www.instagram.com/${social.instagram}`}
-                />
-              )}
-              {social?.medium && (
-                <ListItem
-                  icon={<AiFillMediumSquare />}
-                  title="Medium:"
-                  value={social.medium}
-                  link={`https://medium.com/@${social.medium}`}
-                />
-              )}
-              {social?.dev && (
-                <ListItem
-                  icon={<FaDev />}
-                  title="Dev:"
-                  value={social.dev}
-                  link={`https://dev.to/${social.dev}`}
-                />
-              )}
-              {social?.stackoverflow && (
-                <ListItem
-                  icon={<FaStackOverflow />}
-                  title="Stack Overflow:"
-                  value={social.stackoverflow.split('/').slice(-1)}
-                  link={`https://stackoverflow.com/users/${social.stackoverflow}`}
-                />
-              )}
-              {social?.website && (
-                <ListItem
-                  icon={<FaGlobe />}
-                  title="Website:"
-                  value={social.website}
-                  link={social.website}
-                />
-              )}
-              {social?.skype && (
-                <ListItem
-                  icon={<FaSkype />}
-                  title="Skype"
-                  value={social.skype}
-                  link={`skype:${social.skype}?chat`}
-                />
-              )}
-              {social?.telegram && (
-                <ListItem
-                  icon={<FaTelegram />}
-                  title="Telegram"
-                  value={social.telegram}
-                  link={`https://t.me/${social.telegram}`}
-                />
-              )}
-
-              {social?.phone && (
-                <ListItem
-                  icon={<RiPhoneFill />}
-                  title="Phone:"
-                  value={social.phone}
-                  link={`tel:${social.phone}`}
-                />
-              )}
-              {social?.email && (
-                <ListItem
-                  icon={<RiMailFill />}
-                  title="Email:"
-                  value={social.email}
-                  link={`mailto:${social.email}`}
-                />
-              )}
-            </Fragment>
-          )}
-        </div>
+            )}
+            {profile.company && (
+              <ListItem
+                icon={<FaBuilding />}
+                title="Company:"
+                value={profile.company}
+                link={
+                  isCompanyMention(profile.company.trim())
+                    ? companyLink(profile.company.trim())
+                    : null
+                }
+              />
+            )}
+            <ListItem
+              icon={<AiFillGithub />}
+              title="GitHub:"
+              value={github.username}
+              link={`https://github.com/${github.username}`}
+            />
+            {social?.linkedin && (
+              <ListItem
+                icon={<FaLinkedin />}
+                title="LinkedIn:"
+                value={social.linkedin}
+                link={`https://www.linkedin.com/in/${social.linkedin}`}
+              />
+            )}
+            {social?.phone && (
+              <ListItem
+                icon={<RiPhoneFill />}
+                title="Phone:"
+                value={social.phone}
+                link={`tel:${social.phone}`}
+              />
+            )}
+            {social?.email && (
+              <ListItem
+                icon={<RiMailFill />}
+                title="Email:"
+                value={social.email}
+                link={`mailto:${social.email}`}
+              />
+            )}
+          </>
+        )}
       </div>
-    </div>
+    </Card>
   );
 };
 
 Details.propTypes = {
+  about: PropTypes.object,
   profile: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   social: PropTypes.object.isRequired,

@@ -1,11 +1,11 @@
-import { Fragment } from 'react';
+import {} from 'react';
 import { Helmet } from 'react-helmet-async';
 import PropTypes from 'prop-types';
 import { isDarkishTheme } from '../../helpers/utils';
 
 const HeadTagEditor = ({ profile, theme, googleAnalytics, social }) => {
   return (
-    <Fragment>
+    <>
       {profile && (
         <Helmet>
           {googleAnalytics?.id && (
@@ -55,7 +55,7 @@ const HeadTagEditor = ({ profile, theme, googleAnalytics, social }) => {
           <meta name="twitter:image" content={profile.avatar} />
         </Helmet>
       )}
-    </Fragment>
+    </>
   );
 };
 

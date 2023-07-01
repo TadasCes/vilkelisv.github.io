@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { , useEffect, useState } from 'react';
 import { ga, skeleton } from '../../helpers/utils';
 import LazyImage from '../lazy-image';
 import PropTypes from 'prop-types';
@@ -175,7 +175,7 @@ const Blog = ({ loading, blog, googleAnalytics }) => {
   };
 
   return (
-    <Fragment>
+    <>
       {displaySection(blog) && (
         <div className="col-span-1 lg:col-span-2">
           <div className="grid grid-cols-2 gap-6">
@@ -212,7 +212,7 @@ const Blog = ({ loading, blog, googleAnalytics }) => {
           </div>
         </div>
       )}
-    </Fragment>
+    </>
   );
 };
 

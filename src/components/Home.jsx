@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import HeadTagEditor from './head-tag-editor';
 import ErrorPage from './error-page';
 import ThemeChanger from './theme-changer';
@@ -25,10 +25,10 @@ import { HelmetProvider } from 'react-helmet-async';
 import PropTypes from 'prop-types';
 import '../assets/index.css';
 import { formatDistance } from 'date-fns';
-import ProjectCard from './Projects/project-card';
 import { bgColor } from '../assets/style-const';
 import { BtnNavigate } from './buttons/btn-navigate/BtnNavigate';
 import { Menu } from './menu/Menu';
+import AllProjects from './Projects/all-projects';
 
 const Home = ({ config }) => {
   const [error, setError] = useState(
@@ -154,7 +154,7 @@ const Home = ({ config }) => {
           />
         ) : (
           sanitizedConfig && (
-            <Fragment>
+            <>
               <Menu />
               <div className={`p-4 lg:p-10 min-h-full ${bgColor}`}>
                 <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box">
@@ -192,9 +192,10 @@ const Home = ({ config }) => {
                   </div>
                   <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
                     <div className="grid col-span-6 gap-6">
-                      <ProjectCard
+                      <AllProjects
                         loading={loading}
-                        externalProjects={sanitizedConfig.externalProjects}
+                        projects={sanitizedConfig.externalProjects}
+                        shownCount={3}
                         googleAnalytics={sanitizedConfig.googleAnalytics}
                       />
                     </div>
@@ -207,14 +208,8 @@ const Home = ({ config }) => {
                       />
                     </div> */}
                   </div>
-                  <div className="grid grid-cols-1 col-span-6 gap-6">
-                    <div className="grid grid-cols-1 gap-6">
-                      <Details
-                        profile={profile}
-                        loading={loading}
-                        github={sanitizedConfig.github}
-                        social={sanitizedConfig.social}
-                      />
+                  <div className="grid col-span-2 gap-6">
+                    <div className="grid gap-6">
                       <Skill
                         loading={loading}
                         skills={sanitizedConfig.skills}
@@ -226,6 +221,17 @@ const Home = ({ config }) => {
                       blog={sanitizedConfig.blog}
                     /> */}
                   </div>
+                  <div className="grid grid-cols-1 col-span-4 gap-6">
+                    <div className="grid grid-cols-1 gap-6">
+                      <Details
+                        about={sanitizedConfig.about}
+                        profile={profile}
+                        loading={loading}
+                        github={sanitizedConfig.github}
+                        social={sanitizedConfig.social}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
               <footer
@@ -235,7 +241,7 @@ const Home = ({ config }) => {
                   <Footer content={sanitizedConfig.footer} loading={loading} />
                 </div>
               </footer>
-            </Fragment>
+            </>
           )
         )}
       </div>
