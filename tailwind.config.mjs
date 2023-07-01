@@ -3,6 +3,10 @@ import config from './gitprofile.config';
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
+    textColor: {
+      white: '#FFF',
+      black: '#000',
+    },
     extend: {},
   },
   plugins: [require('daisyui')],

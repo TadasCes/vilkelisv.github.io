@@ -27,8 +27,10 @@ import '../assets/index.css';
 import { formatDistance } from 'date-fns';
 import ProjectCard from './Projects/project-card';
 import { bgColor } from '../assets/style-const';
+import { BtnNavigate } from './buttons/btn-navigate/BtnNavigate';
+import { Menu } from './menu/Menu';
 
-const GitProfile = ({ config }) => {
+const Home = ({ config }) => {
   const [error, setError] = useState(
     typeof config === 'undefined' && !config ? noConfigError : null
   );
@@ -142,7 +144,8 @@ const GitProfile = ({ config }) => {
           social={sanitizedConfig.social}
         />
       )}
-      <div className="fade-in h-screen">
+      {/* <div className="m-auto fade-in h-screen w-3/4"> */}
+      <div className="m-auto fade-in h-screen w-4/4">
         {error ? (
           <ErrorPage
             status={`${error.status}`}
@@ -152,10 +155,11 @@ const GitProfile = ({ config }) => {
         ) : (
           sanitizedConfig && (
             <Fragment>
+              <Menu />
               <div className={`p-4 lg:p-10 min-h-full ${bgColor}`}>
                 <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box">
-                  <div className="grid grid-cols-1 lg:grid-cols-3 col-span-6 gap-6">
-                    <div className="grid grid-cols-1 gap-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
+                    <div className="grid col-span-6 lg:col-span-4 gap-6">
                       {!sanitizedConfig.themeConfig.disableSwitch && (
                         <ThemeChanger
                           theme={theme}
@@ -171,7 +175,7 @@ const GitProfile = ({ config }) => {
                         resume={sanitizedConfig.resume}
                       />
                     </div>
-                    <div className="grid grid-cols-1 gap-6">
+                    <div className="grid col-span-6 lg:col-span-2 gap-6">
                       <Experience
                         loading={loading}
                         experiences={sanitizedConfig.experiences}
@@ -185,6 +189,25 @@ const GitProfile = ({ config }) => {
                         certifications={sanitizedConfig.certifications}
                       />
                     </div>
+                  </div>
+                  <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
+                    <div className="grid col-span-6 gap-6">
+                      <ProjectCard
+                        loading={loading}
+                        externalProjects={sanitizedConfig.externalProjects}
+                        googleAnalytics={sanitizedConfig.googleAnalytics}
+                      />
+                    </div>
+                    {/* <div className="grid grid-cols-1 lg:grid-cols-1 col-span-2 gap-6">
+                      <GithubProject
+                        repo={repo}
+                        loading={loading}
+                        github={sanitizedConfig.github}
+                        googleAnalytics={sanitizedConfig.googleAnalytics}
+                      />
+                    </div> */}
+                  </div>
+                  <div className="grid grid-cols-1 col-span-6 gap-6">
                     <div className="grid grid-cols-1 gap-6">
                       <Details
                         profile={profile}
@@ -197,30 +220,11 @@ const GitProfile = ({ config }) => {
                         skills={sanitizedConfig.skills}
                       />
                     </div>
-                  </div>
-                  <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
-                    <div className="grid grid-cols-2 lg:grid-cols-2 col-span-4 gap-6">
-                      <ProjectCard
-                        loading={loading}
-                        externalProjects={sanitizedConfig.externalProjects}
-                        googleAnalytics={sanitizedConfig.googleAnalytics}
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-1 col-span-2 gap-6">
-                      <GithubProject
-                        repo={repo}
-                        loading={loading}
-                        github={sanitizedConfig.github}
-                        googleAnalytics={sanitizedConfig.googleAnalytics}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 col-span-6 gap-6">
-                    <Blog
+                    {/* <Blog
                       loading={loading}
                       googleAnalytics={sanitizedConfig.googleAnalytics}
                       blog={sanitizedConfig.blog}
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -239,7 +243,7 @@ const GitProfile = ({ config }) => {
   );
 };
 
-GitProfile.propTypes = {
+Home.propTypes = {
   config: PropTypes.shape({
     github: PropTypes.shape({
       username: PropTypes.string.isRequired,
@@ -335,4 +339,4 @@ GitProfile.propTypes = {
   }).isRequired,
 };
 
-export default GitProfile;
+export default Home;

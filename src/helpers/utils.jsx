@@ -1,6 +1,18 @@
 import colors from '../data/colors.json';
 import { hotjar } from 'react-hotjar';
 
+export const truncate = (str, charCount, useWordBoundary) => {
+  if (str.length <= charCount) {
+    return str;
+  }
+  const subString = str.slice(0, charCount - 1);
+  return (
+    (useWordBoundary
+      ? subString.slice(0, subString.lastIndexOf(' '))
+      : subString) + '\u2026'
+  );
+};
+
 export const getInitialTheme = (themeConfig) => {
   if (themeConfig.disableSwitch) {
     return themeConfig.defaultTheme;

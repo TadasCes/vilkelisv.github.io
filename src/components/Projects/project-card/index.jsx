@@ -1,7 +1,9 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { ga, skeleton } from '../../../helpers/utils';
+import { ga, skeleton, truncate } from '../../../helpers/utils';
 import LazyImage from '../../lazy-image';
+import { BtnNavigate } from '../../buttons/btn-navigate/BtnNavigate';
+import { AiOutlineArrowDown } from 'react-icons/ai';
 
 const displaySection = (externalProjects) => {
   if (
@@ -94,31 +96,49 @@ const ProjectCard = ({ externalProjects, loading, googleAnalytics }) => {
         }}
       >
         <div className="p-8 h-full w-full">
-          <div className="flex items-center flex-col">
+          <div className="flex items-left flex-col">
             <div className="w-full">
               <div className="px-4">
-                <div className="text-center w-full">
-                  <h2 className="font-semibold text-lg tracking-wide text-center opacity-60 mb-2">
-                    {item.title}
-                  </h2>
-                  {item.imageUrl && (
-                    <div className="avatar opacity-90">
-                      <div className="w-20 h-20 mask mask-squircle">
-                        <LazyImage
-                          src={item.imageUrl}
-                          alt={'thumbnail'}
-                          placeholder={skeleton({
-                            width: 'w-full',
-                            height: 'h-full',
-                            shape: '',
-                          })}
-                        />
+                <div className="text-left w-full ">
+                  <div className="grid grid-cols-10 ">
+                    <div className="w-fit col-span-1">
+                      {item.imageUrl && (
+                        <div className="avatar opacity-90">
+                          <div className="w-20 h-20 mask mask-squircle">
+                            <LazyImage
+                              src={item.imageUrl}
+                              alt={'thumbnail'}
+                              placeholder={skeleton({
+                                width: 'w-full',
+                                height: 'h-full',
+                                shape: '',
+                              })}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className=" ml-5 col-span-8">
+                      <div className="block w-full">
+                        <h2 className="font-semibold text-lg tracking-wide text-left opacity-60 mb-2">
+                          {item.title}
+                        </h2>
+                      </div>
+                      <div className="block w-full">
+                        <p className="mt-1 text-base-content text-opacity-60 text-sm">
+                          {truncate(item.description, 100, true)}
+                        </p>
                       </div>
                     </div>
-                  )}
-                  <p className="mt-1 text-base-content text-opacity-60 text-sm">
-                    {item.description}
-                  </p>
+                    <div className="col-span-1 flex justify-self-center self-center">
+                      <button className="rounded-full p-3 font-semibold transition ease-in-out drop-shadow-md bg-blue-500 hover:bg-blue-600 hover:drop-shadow-lg hover:scale-110">
+                        <AiOutlineArrowDown
+                          size="20px"
+                          className="text-white"
+                        />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -148,11 +168,12 @@ const ProjectCard = ({ externalProjects, loading, googleAnalytics }) => {
                     </h5>
                   </div>
                   <div className="col-span-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid col-span-2 gap-6 ">
                       {loading ? renderSkeleton() : renderExternalProjects()}
                     </div>
                   </div>
                 </div>
+                <BtnNavigate title="All projects" destinationUrl="/projects" />
               </div>
             </div>
           </div>
