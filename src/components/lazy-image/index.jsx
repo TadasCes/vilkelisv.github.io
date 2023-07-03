@@ -1,4 +1,4 @@
-import { useState, , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const LazyImage = ({ placeholder, src, alt, ...rest }) => {
@@ -13,11 +13,7 @@ const LazyImage = ({ placeholder, src, alt, ...rest }) => {
     };
   }, [src]);
 
-  return (
-    <>
-      {loading ? placeholder : <img src={src} alt={alt} {...rest} />}
-    </>
-  );
+  return <>{loading ? placeholder : <img src={src} alt={alt} {...rest} />}</>;
 };
 
 LazyImage.propTypes = {

@@ -29,6 +29,7 @@ import { bgColor } from '../assets/style-const';
 import { BtnNavigate } from './buttons/btn-navigate/BtnNavigate';
 import { Menu } from './menu/Menu';
 import AllProjects from './Projects/all-projects';
+import { motion } from 'framer-motion';
 
 const Home = ({ config }) => {
   const [error, setError] = useState(
@@ -123,7 +124,7 @@ const Home = ({ config }) => {
       );
 
       if (error.response.status === 403) {
-        setError(tooManyRequestError(reset));
+        // setError(tooManyRequestError(reset));
       } else if (error.response.status === 404) {
         setError(notFoundError);
       } else {
@@ -145,7 +146,7 @@ const Home = ({ config }) => {
         />
       )}
       {/* <div className="m-auto fade-in h-screen w-3/4"> */}
-      <div className="m-auto fade-in h-screen w-4/4">
+      <div className="m-auto h-screen w-4/4">
         {error ? (
           <ErrorPage
             status={`${error.status}`}
@@ -155,7 +156,7 @@ const Home = ({ config }) => {
         ) : (
           sanitizedConfig && (
             <>
-              <Menu />
+              {/* <Menu /> */}
               <div className={`p-4 lg:p-10 min-h-full ${bgColor}`}>
                 <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box">
                   <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
@@ -184,10 +185,10 @@ const Home = ({ config }) => {
                         loading={loading}
                         education={sanitizedConfig.education}
                       />
-                      <Certification
+                      {/* <Certification
                         loading={loading}
                         certifications={sanitizedConfig.certifications}
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
@@ -223,13 +224,13 @@ const Home = ({ config }) => {
                   </div>
                   <div className="grid grid-cols-1 col-span-4 gap-6">
                     <div className="grid grid-cols-1 gap-6">
-                      <Details
+                      {/* <Details
                         about={sanitizedConfig.about}
                         profile={profile}
                         loading={loading}
                         github={sanitizedConfig.github}
                         social={sanitizedConfig.social}
-                      />
+                      /> */}
                     </div>
                   </div>
                 </div>

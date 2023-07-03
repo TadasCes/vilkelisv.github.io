@@ -42,7 +42,7 @@ const Education = ({ loading, education }) => {
   return (
     <>
       {education?.length !== 0 && (
-        <Card>
+        <Card cardId="education">
           <div className="mx-3">
             <h5 className="card-title">
               {loading ? (

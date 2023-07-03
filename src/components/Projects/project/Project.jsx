@@ -18,17 +18,14 @@ import Certification from '../../certification';
 import { bgColor } from '../../../assets/style-const';
 import { BtnBack } from '../../buttons/btn-back/BtnBack';
 import LazyImage from '../../lazy-image';
+import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+import { Card } from '../../layout/card';
 
 export const Project = () => {
-  const project = {
-    index: '1',
-    imageUrl: 'https://picsum.photos/200/300',
-    title: 'This is a test project',
-    stack: ['AppsScript, JavaScript'],
-    description: `
-    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). 
-    `,
-  };
+  const { state } = useLocation();
+  const project = state.project;
+
   const [theme, setTheme] = useState(null);
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
@@ -145,36 +142,48 @@ export const Project = () => {
 
   return (
     <>
-      <div className="col-span-1 lg:col-span-2">
-        <div className="grid grid-cols-2 gap-6">
-          <div className="col-span-2">
-            <div className="card p-5">
-              <div className="mx-3 flex items-center mb-2">
-                <div className="grid grid-cols-4 gap-6 mb-5">
-                  <div className="col-span-1">
-                    <BtnBack />
-                  </div>
-                  <div className="col-span-3">
-                    <h5 className="text-center card-title">
-                      {loading ? (
-                        skeleton({ width: 'w-40', height: 'h-8' })
-                      ) : (
-                        <span className="text-4xl opacity-90">
-                          My Project title
-                        </span>
-                      )}
-                    </h5>
-                  </div>
-                </div>
-              </div>
+      <div className={`p-4 lg:p-10 min-h-screen ${bgColor}`}>
+        <motion.div
+          className="col-span-1 lg:col-span-2"
+          style={{ overflow: 'hidden' }}
+          initial={{ y: window.innerHeight }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5 }}
+          exit={{ y: 0 }}
+          key={'container'}
+        >
+          <Card>
+            <div className="grid grid-cols-2 gap-6">
               <div className="col-span-2">
-                <div className="grid grid-cols-1 gap-6">
-                  {loading ? renderSkeleton() : renderProject()}
+                <div className="card p-5">
+                  <div className="mx-3 flex items-center mb-2">
+                    <div className="grid grid-cols-4 gap-6 mb-5">
+                      <div className="col-span-1">
+                        <BtnBack />
+                      </div>
+                      <div className="col-span-3">
+                        <h5 className="text-center card-title">
+                          {loading ? (
+                            skeleton({ width: 'w-40', height: 'h-8' })
+                          ) : (
+                            <span className="text-4xl opacity-90">
+                              My Project title
+                            </span>
+                          )}
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-2">
+                    <div className="grid grid-cols-1 gap-6">
+                      {loading ? renderSkeleton() : renderProject()}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </Card>
+        </motion.div>
       </div>
     </>
   );

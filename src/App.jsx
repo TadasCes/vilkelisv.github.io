@@ -1,17 +1,19 @@
-import {} from 'react';
-import config from '../gitprofile.config';
-import Home from './components/Home';
-import { Routes, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Project } from './components/Projects/project/Project';
-import { AllProjects } from './components/Projects/all-projects';
+import AllProjects from './components/Projects/all-projects';
+import Home from './components/Home';
+import config from '../gitprofile.config';
 
 function App() {
+  const location = useLocation();
+  const previousLocation = location.state?.previousLocation;
   return (
     <>
       <div>
-        <Routes>
-          <Route path="/projects/:id" element={<Project config={config} />} />
-          <Route path="/projects/" element={<AllProjects config={config} />} />
+        <Routes location={location}>
+          <Route path="/projects/:id" element={<Project />} />
+          <Route path="/projects/" element={<AllProjects />} />
           <Route path="/" element={<Home config={config} />} />
         </Routes>
       </div>

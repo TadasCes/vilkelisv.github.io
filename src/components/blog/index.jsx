@@ -1,4 +1,4 @@
-import { , useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ga, skeleton } from '../../helpers/utils';
 import LazyImage from '../lazy-image';
 import PropTypes from 'prop-types';

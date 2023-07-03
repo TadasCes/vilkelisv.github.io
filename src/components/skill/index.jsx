@@ -19,7 +19,7 @@ const Skill = ({ loading, skills }) => {
   return (
     <>
       {skills?.length !== 0 && (
-        <Card>
+        <Card cardId="skills">
           <div className="mx-3">
             <h5 className="card-title">
               {loading ? (

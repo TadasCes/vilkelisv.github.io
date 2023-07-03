@@ -4,31 +4,35 @@ import { ga, skeleton, truncate } from '../../../helpers/utils';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import { cardBgColor } from '../../../assets/style-const';
+import { Link, useLocation } from 'react-router-dom';
 
 export const ProjectCard = ({ project, loading, googleAnalytics }) => {
+  const location = useLocation();
+
   return (
-    <a
+    <Link
       className={`card shadow-lg compact cursor-pointer mb-5 ${cardBgColor}`}
       key={project.title}
-      href={project.link}
-      onClick={(e) => {
-        e.preventDefault();
+      to={project.link}
+      state={{ project }}
+      // onClick={(e) => {
+      //   e.preventDefault();
 
-        try {
-          if (googleAnalytics?.id) {
-            ga.event({
-              action: `Click project: ${project.title}`,
-              params: {
-                post: project.title,
-              },
-            });
-          }
-        } catch (error) {
-          console.error(error);
-        }
+      //   try {
+      //     if (googleAnalytics?.id) {
+      //       ga.event({
+      //         action: `Click project: ${project.title}`,
+      //         params: {
+      //           post: project.title,
+      //         },
+      //       });
+      //     }
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
 
-        window?.open(project.link, '_blank');
-      }}
+      //   window?.open(project.link, '_self');
+      // }}
     >
       <div className="p-8  h-full w-full">
         <div className="flex items-left flex-col">
@@ -103,7 +107,7 @@ export const ProjectCard = ({ project, loading, googleAnalytics }) => {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

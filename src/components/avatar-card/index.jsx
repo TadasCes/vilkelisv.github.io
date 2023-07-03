@@ -5,7 +5,7 @@ import { Card } from '../layout/card';
 
 const AvatarCard = ({ profile, loading, avatarRing, resume }) => {
   return (
-    <Card>
+    <Card cardId="avatar">
       <div className="grid place-items-center py-8">
         {loading || !profile ? (
           <div className="avatar opacity-90">

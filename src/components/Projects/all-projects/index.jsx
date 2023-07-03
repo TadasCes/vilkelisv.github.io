@@ -10,7 +10,7 @@ import { Card } from '../../layout/card';
 export const AllProjects = ({ projects, shownCount, loading }) => {
   const allProjects = projects;
   return (
-    <Card>
+    <Card cardId="all-projects">
       <>
         <div className="mx-3">
           <h5 className="card-title">
@@ -39,8 +39,8 @@ export const AllProjects = ({ projects, shownCount, loading }) => {
 
 AllProjects.propTypes = {
   projects: PropTypes.array,
-  shownCount: PropTypes.number.isRequired,
-  loading: PropTypes.bool.isRequired,
+  shownCount: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
 export default AllProjects;
