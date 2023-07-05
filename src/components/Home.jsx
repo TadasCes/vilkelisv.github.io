@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import HeadTagEditor from './head-tag-editor';
 import ErrorPage from './error-page';
 import ThemeChanger from './theme-changer';
@@ -29,9 +29,46 @@ import { bgColor } from '../assets/style-const';
 import { BtnNavigate } from './buttons/btn-navigate/BtnNavigate';
 import { Menu } from './menu/Menu';
 import AllProjects from './Projects/all-projects';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useMainContainer } from './layout/card/useMainContainer';
+import { routeVariants } from './layout/variants';
+import {
+  Link,
+  unstable_HistoryRouter,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
+import { useConfigs } from '../helpers/useConfigs';
 
+let mainContainer;
 const Home = ({ config }) => {
+  const {
+    pageTopBorderCoords,
+    setPageTopBorderCoords,
+    allProjectsCardCoords,
+    setAllProjectsCardCoords,
+  } = useConfigs();
+  const location = useLocation();
+  const [previousPage, setPreviousPage] = useState('');
+  const [comingFromProjects, setComingFromProjects] = useState({});
+
+  // useEffect(() => {
+  //   setAllProjectsCardCoords({
+  //     y: document.getElementById('all-projects').getBoundingClientRect().top,
+  //   });
+  // }, [location]);
+
+  useEffect(() => {
+    setPageTopBorderCoords(
+      document.getElementById('main-page-container').getBoundingClientRect().top
+    );
+  }, [location]);
+
+  useEffect(() => {
+    if (location.state.comingFromSub) setComingFromProjects(location.state);
+  }, [location]);
+
+  mainContainer = useRef(null);
   const [error, setError] = useState(
     typeof config === 'undefined' && !config ? noConfigError : null
   );
@@ -47,7 +84,7 @@ const Home = ({ config }) => {
     if (sanitizedConfig) {
       setTheme(getInitialTheme(sanitizedConfig.themeConfig));
       setupHotjar(sanitizedConfig.hotjar);
-      loadData();
+      // loadData();
     }
   }, [sanitizedConfig]);
 
@@ -55,62 +92,62 @@ const Home = ({ config }) => {
     theme && document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const loadData = useCallback(() => {
-    axios
-      .get(`https://api.github.com/users/${sanitizedConfig.github.username}`)
-      .then((response) => {
-        let data = response.data;
+  // const loadData = useCallback(() => {
+  //   axios
+  //     .get(`https://api.github.com/users/${sanitizedConfig.github.username}`)
+  //     .then((response) => {
+  //       let data = response.data;
 
-        let profileData = {
-          avatar: data.avatar_url,
-          name: data.name ? data.name : '',
-          bio: data.bio ? data.bio : '',
-          location: data.location ? data.location : '',
-          company: data.company ? data.company : '',
-        };
+  //       let profileData = {
+  //         avatar: data.avatar_url,
+  //         name: data.name ? data.name : '',
+  //         bio: data.bio ? data.bio : '',
+  //         location: data.location ? data.location : '',
+  //         company: data.company ? data.company : '',
+  //       };
 
-        setProfile(profileData);
-        return data;
-      })
-      .then((userData) => {
-        let excludeRepo = ``;
-        if (userData.public_repos === 0) {
-          setRepo([]);
-          return;
-        }
+  //       setProfile(profileData);
+  //       return data;
+  //     })
+  //     .then((userData) => {
+  //       let excludeRepo = ``;
+  //       if (userData.public_repos === 0) {
+  //         setRepo([]);
+  //         return;
+  //       }
 
-        sanitizedConfig.github.exclude.projects.forEach((project) => {
-          excludeRepo += `+-repo:${sanitizedConfig.github.username}/${project}`;
-        });
+  //       sanitizedConfig.github.exclude.projects.forEach((project) => {
+  //         excludeRepo += `+-repo:${sanitizedConfig.github.username}/${project}`;
+  //       });
 
-        let query = `user:${
-          sanitizedConfig.github.username
-        }+fork:${!sanitizedConfig.github.exclude.forks}${excludeRepo}`;
+  //       let query = `user:${
+  //         sanitizedConfig.github.username
+  //       }+fork:${!sanitizedConfig.github.exclude.forks}${excludeRepo}`;
 
-        let url = `https://api.github.com/search/repositories?q=${query}&sort=${sanitizedConfig.github.sortBy}&per_page=${sanitizedConfig.github.limit}&type=Repositories`;
+  //       let url = `https://api.github.com/search/repositories?q=${query}&sort=${sanitizedConfig.github.sortBy}&per_page=${sanitizedConfig.github.limit}&type=Repositories`;
 
-        axios
-          .get(url, {
-            headers: {
-              'Content-Type': 'application/vnd.github.v3+json',
-            },
-          })
-          .then((response) => {
-            let data = response.data;
+  //       axios
+  //         .get(url, {
+  //           headers: {
+  //             'Content-Type': 'application/vnd.github.v3+json',
+  //           },
+  //         })
+  //         .then((response) => {
+  //           let data = response.data;
 
-            setRepo(data.items);
-          })
-          .catch((error) => {
-            handleError(error);
-          });
-      })
-      .catch((error) => {
-        handleError(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [setLoading]);
+  //           setRepo(data.items);
+  //         })
+  //         .catch((error) => {
+  //           handleError(error);
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       handleError(error);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, [setLoading]);
 
   const handleError = (error) => {
     console.error('Error:', error);
@@ -146,7 +183,7 @@ const Home = ({ config }) => {
         />
       )}
       {/* <div className="m-auto fade-in h-screen w-3/4"> */}
-      <div className="m-auto h-screen w-4/4">
+      <motion.div className="m-auto h-screen w-4/4" key={'test'}>
         {error ? (
           <ErrorPage
             status={`${error.status}`}
@@ -157,18 +194,14 @@ const Home = ({ config }) => {
           sanitizedConfig && (
             <>
               {/* <Menu /> */}
-              <div className={`p-4 lg:p-10 min-h-full ${bgColor}`}>
-                <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box">
+              <div ref={mainContainer} className={`p-4 lg:p-10 min-h-full`}>
+                <Link to={'/foo'}>To foo </Link>
+                <div
+                  id="main-page-container"
+                  className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
+                >
                   <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
                     <div className="grid col-span-6 lg:col-span-4 gap-6">
-                      {!sanitizedConfig.themeConfig.disableSwitch && (
-                        <ThemeChanger
-                          theme={theme}
-                          setTheme={setTheme}
-                          loading={loading}
-                          themeConfig={sanitizedConfig.themeConfig}
-                        />
-                      )}
                       <AvatarCard
                         profile={profile}
                         loading={loading}
@@ -198,6 +231,7 @@ const Home = ({ config }) => {
                         projects={sanitizedConfig.externalProjects}
                         shownCount={3}
                         googleAnalytics={sanitizedConfig.googleAnalytics}
+                        comingFromSubPage={comingFromProjects}
                       />
                     </div>
                     {/* <div className="grid grid-cols-1 lg:grid-cols-1 col-span-2 gap-6">
@@ -209,30 +243,30 @@ const Home = ({ config }) => {
                       />
                     </div> */}
                   </div>
-                  <div className="grid col-span-2 gap-6">
+                  {/* <div className="grid col-span-2 gap-6">
                     <div className="grid gap-6">
                       <Skill
                         loading={loading}
                         skills={sanitizedConfig.skills}
                       />
                     </div>
-                    {/* <Blog
+                    <Blog
                       loading={loading}
                       googleAnalytics={sanitizedConfig.googleAnalytics}
                       blog={sanitizedConfig.blog}
-                    /> */}
+                    />
                   </div>
                   <div className="grid grid-cols-1 col-span-4 gap-6">
                     <div className="grid grid-cols-1 gap-6">
-                      {/* <Details
+                      <Details
                         about={sanitizedConfig.about}
                         profile={profile}
                         loading={loading}
                         github={sanitizedConfig.github}
                         social={sanitizedConfig.social}
-                      /> */}
+                      />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <footer
@@ -245,7 +279,7 @@ const Home = ({ config }) => {
             </>
           )
         )}
-      </div>
+      </motion.div>
     </HelmetProvider>
   );
 };
@@ -346,4 +380,4 @@ Home.propTypes = {
   }).isRequired,
 };
 
-export default Home;
+export { Home, mainContainer };
