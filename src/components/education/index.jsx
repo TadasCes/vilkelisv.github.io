@@ -2,6 +2,8 @@ import { skeleton } from '../../helpers/utils';
 import {} from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../layout/card';
+import { useLoadData } from '../../helpers/useLoadData';
+import { CardContent, CardTitle } from '../layout/card/card-components';
 
 const ListItem = ({ time, degree, institution }) => (
   <li className="mb-5 ml-4">
@@ -15,7 +17,9 @@ const ListItem = ({ time, degree, institution }) => (
   </li>
 );
 
-const Education = ({ loading, education }) => {
+const Education = () => {
+  const { loading, data: education } = useLoadData('education');
+
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 2; index++) {
@@ -43,16 +47,8 @@ const Education = ({ loading, education }) => {
     <>
       {education?.length !== 0 && (
         <Card cardId="education">
-          <div className="mx-3">
-            <h5 className="card-title">
-              {loading ? (
-                skeleton({ width: 'w-32', height: 'h-8' })
-              ) : (
-                <span className="text-base-content opacity-70">Education</span>
-              )}
-            </h5>
-          </div>
-          <div className="text-base-content text-opacity-60">
+          <CardTitle text={'Education'} loading={loading} />
+          <CardContent>
             <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
               {loading ? (
                 renderSkeleton()
@@ -69,16 +65,11 @@ const Education = ({ loading, education }) => {
                 </>
               )}
             </ol>
-          </div>
+          </CardContent>
         </Card>
       )}
     </>
   );
-};
-
-Education.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  education: PropTypes.array.isRequired,
 };
 
 ListItem.propTypes = {

@@ -23,6 +23,8 @@ import {
 import PropTypes from 'prop-types';
 import { skeleton } from '../../helpers/utils';
 import { Card } from '../layout/card';
+import { useLoadData } from '../../helpers/useLoadData';
+import { CardContent, CardTitle } from '../layout/card/card-components';
 
 const isCompanyMention = (company) => {
   return company.startsWith('@') && !company.includes(' ');
@@ -66,7 +68,9 @@ const ListItem = ({ icon, title, value, link, skeleton = false }) => {
     </a>
   );
 };
-const Details = ({ about, profile, loading, social, github }) => {
+const Details = () => {
+  const { loading, data: details } = useLoadData('details');
+
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 4; index++) {
@@ -85,82 +89,60 @@ const Details = ({ about, profile, loading, social, github }) => {
   };
 
   return (
-    <Card>
+    <Card cardId={'details'}>
       <div className="text-base-content text-opacity-60">
-        {loading || !profile ? (
+        {loading ? (
           renderSkeleton()
         ) : (
           <>
-            <div className="text-base-content opacity-70">
-              <span className="text-2xl font-semibold">About me</span>
-            </div>
-            <div>
-              <span>{about.who}</span>
-              <br />
-              <span>{about.story}</span>
-            </div>
-            {profile.location && (
+            <CardTitle text={'About me'} loading={loading} />
+            <CardContent>
+              <div>
+                <span>{details.story}</span>
+              </div>
+              {details.location && (
+                <ListItem
+                  icon={<MdLocationOn />}
+                  title="Based in:"
+                  value={details.location}
+                />
+              )}
               <ListItem
-                icon={<MdLocationOn />}
-                title="Based in:"
-                value={profile.location}
+                icon={<AiFillGithub />}
+                title="GitHub:"
+                value={details.github}
+                link={`https://github.com/${details.github}`}
               />
-            )}
-            {profile.company && (
-              <ListItem
-                icon={<FaBuilding />}
-                title="Company:"
-                value={profile.company}
-                link={
-                  isCompanyMention(profile.company.trim())
-                    ? companyLink(profile.company.trim())
-                    : null
-                }
-              />
-            )}
-            <ListItem
-              icon={<AiFillGithub />}
-              title="GitHub:"
-              value={github.username}
-              link={`https://github.com/${github.username}`}
-            />
-            {social?.linkedin && (
-              <ListItem
-                icon={<FaLinkedin />}
-                title="LinkedIn:"
-                value={social.linkedin}
-                link={`https://www.linkedin.com/in/${social.linkedin}`}
-              />
-            )}
-            {social?.phone && (
-              <ListItem
-                icon={<RiPhoneFill />}
-                title="Phone:"
-                value={social.phone}
-                link={`tel:${social.phone}`}
-              />
-            )}
-            {social?.email && (
-              <ListItem
-                icon={<RiMailFill />}
-                title="Email:"
-                value={social.email}
-                link={`mailto:${social.email}`}
-              />
-            )}
+              {details.linkedin?.linkedin && (
+                <ListItem
+                  icon={<FaLinkedin />}
+                  title="LinkedIn:"
+                  value={details.linkedin.linkedin}
+                  link={`https://www.linkedin.com/in/${details.linkedin.linkedin}`}
+                />
+              )}
+              {details?.phone && (
+                <ListItem
+                  icon={<RiPhoneFill />}
+                  title="Phone:"
+                  value={details.phone}
+                  link={`tel:${details.phone}`}
+                />
+              )}
+              {details?.email && (
+                <ListItem
+                  icon={<RiMailFill />}
+                  title="Email:"
+                  value={details.email}
+                  link={`mailto:${details.email}`}
+                />
+              )}
+            </CardContent>
           </>
         )}
       </div>
     </Card>
   );
-};
-
-Details.propTypes = {
-  about: PropTypes.object,
-  profile: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
-  social: PropTypes.object.isRequired,
-  github: PropTypes.object.isRequired,
 };
 
 ListItem.propTypes = {

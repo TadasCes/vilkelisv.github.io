@@ -1,13 +1,21 @@
+/* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
 import { fallbackImage, skeleton } from '../../helpers/utils';
 import LazyImage from '../lazy-image';
 import { Card } from '../layout/card';
+import { useEffect, useState } from 'react';
+import dataConfig from '../../../data.configs';
+import { BaseText, Headline, Subheadline } from '../text-components';
+import { useLoadData } from '../../helpers/useLoadData';
 
-const AvatarCard = ({ profile, loading, avatarRing, resume }) => {
+const AvatarCard = ({ avatarRing, resume }) => {
+  const { loading, data: profile } = useLoadData('about');
+
   return (
-    <Card cardId="avatar">
-      <div className="grid place-items-center py-8">
-        {loading || !profile ? (
+    !loading && (
+      <Card cardId="avatar">
+        <div className="grid place-items-start py-8">
+          {/* {loading ? (
           <div className="avatar opacity-90">
             <div className="mb-8 rounded-full w-32 h-32">
               {skeleton({
@@ -19,16 +27,12 @@ const AvatarCard = ({ profile, loading, avatarRing, resume }) => {
           </div>
         ) : (
           <div className="avatar opacity-90">
-            <div
-              className={`mb-8 rounded-full w-32 h-32 ${
-                avatarRing
-                  ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
-                  : ''
-              }`}
-            >
+            <div className={`mb-8 w-96 h-96}`}>
               {
                 <LazyImage
-                  src={profile.avatar ? profile.avatar : fallbackImage}
+                  src={
+                    'https://lh6.googleusercontent.com/KdmN8dsGPKzbtODwJ6NcTzebGyQeOnfJdehtiaLE_ZuTpe5uW_XmHDJfzJOzSE8a5JRt5Z7visgHwH0'
+                  }
                   alt={profile.name}
                   placeholder={skeleton({
                     width: 'w-full',
@@ -39,41 +43,31 @@ const AvatarCard = ({ profile, loading, avatarRing, resume }) => {
               }
             </div>
           </div>
-        )}
-        <div className="text-center mx-auto px-8">
-          <h5 className="font-bold text-2xl">
-            {loading || !profile ? (
-              skeleton({ width: 'w-48', height: 'h-8' })
-            ) : (
-              <span className="text-base-content opacity-70">
-                {profile.name}
-              </span>
-            )}
-          </h5>
-          <div className="mt-3 text-base-content text-opacity-60 font-mono">
-            {loading || !profile
-              ? skeleton({ width: 'w-48', height: 'h-5' })
-              : profile.bio}
+        )} */}
+          <div className="text-left px-8">
+            <Headline text={profile.name} loading={loading} />
+            <Subheadline text={profile.bio} loading={loading} />
+            <BaseText text={profile.story} loading={loading} />
           </div>
+          {resume?.fileUrl &&
+            (loading ? (
+              <div className="mt-6">
+                {skeleton({ width: 'w-40', height: 'h-8' })}
+              </div>
+            ) : (
+              <a
+                href={resume.fileUrl}
+                target="_blank"
+                className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
+                download
+                rel="noreferrer"
+              >
+                Download Resume
+              </a>
+            ))}
         </div>
-        {resume?.fileUrl &&
-          (loading ? (
-            <div className="mt-6">
-              {skeleton({ width: 'w-40', height: 'h-8' })}
-            </div>
-          ) : (
-            <a
-              href={resume.fileUrl}
-              target="_blank"
-              className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
-              download
-              rel="noreferrer"
-            >
-              Download Resume
-            </a>
-          ))}
-      </div>
-    </Card>
+      </Card>
+    )
   );
 };
 

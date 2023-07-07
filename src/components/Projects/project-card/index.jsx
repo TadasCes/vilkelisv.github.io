@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import LazyImage from '../../lazy-image';
 import { ga, skeleton, truncate } from '../../../helpers/utils';
 import { AiOutlineArrowDown } from 'react-icons/ai';
@@ -7,13 +7,14 @@ import { cardBgColor } from '../../../assets/style-const';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, easeOut, motion, useInView } from 'framer-motion';
 
-export const ProjectCard = ({
-  project,
-  loading,
-  googleAnalytics,
-  projectCardClicked,
-}) => {
-  const location = useLocation();
+export const ProjectCard = ({ project, projectCardClicked }) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    return () => {
+      setLoading(false);
+    };
+  }, []);
   const state = {
     project: project,
     isVisible: true,
@@ -24,6 +25,10 @@ export const ProjectCard = ({
     initial: { opacity: 0 },
     animate: {
       opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: easeOut,
+      },
     },
     exit: {
       opacity: 0,
@@ -68,19 +73,7 @@ export const ProjectCard = ({
         key={project.title}
         to={project.link}
         state={state}
-        onClick={(e) => {
-          // e.preventDefault();
-          let elem = document.getElementById(project.title);
-          let elemPosition = elem.getBoundingClientRect();
-
-          const elemCoords = {
-            y: elemPosition.y,
-            left: elemPosition.left,
-            right: elemPosition.right,
-          };
-
-          state.position = elemCoords;
-          setMotionConfig(cardClickedAnimation);
+        onClick={() => {
           projectCardClicked(true);
           window.scrollTo({
             top: 0,

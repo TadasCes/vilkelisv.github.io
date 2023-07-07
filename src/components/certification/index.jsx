@@ -2,6 +2,8 @@ import { skeleton } from '../../helpers/utils';
 import {} from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../layout/card';
+import { useLoadData } from '../../helpers/useLoadData';
+import { CardContent, CardTitle } from '../layout/card/card-components';
 
 const ListItem = ({ year, name, body, link }) => (
   <li className="mb-5 ml-4">
@@ -19,7 +21,9 @@ const ListItem = ({ year, name, body, link }) => (
   </li>
 );
 
-const Certification = ({ certifications, loading }) => {
+const Certification = () => {
+  const { loading, data: certifications } = useLoadData('certifications');
+
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 2; index++) {
@@ -46,19 +50,9 @@ const Certification = ({ certifications, loading }) => {
   return (
     <>
       {certifications?.length !== 0 && (
-        <Card>
-          <div className="mx-3">
-            <h5 className="card-title">
-              {loading ? (
-                skeleton({ width: 'w-32', height: 'h-8' })
-              ) : (
-                <span className="text-base-content opacity-70">
-                  Certification
-                </span>
-              )}
-            </h5>
-          </div>
-          <div className="text-base-content text-opacity-60">
+        <Card cardId={'certifications'}>
+          <CardTitle text={'Certifications'} loading={loading} />
+          <CardContent>
             <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
               {loading ? (
                 renderSkeleton()
@@ -76,7 +70,7 @@ const Certification = ({ certifications, loading }) => {
                 </>
               )}
             </ol>
-          </div>
+          </CardContent>
         </Card>
       )}
     </>
@@ -88,11 +82,6 @@ ListItem.propTypes = {
   name: PropTypes.node,
   body: PropTypes.node,
   link: PropTypes.string,
-};
-
-Certification.propTypes = {
-  certifications: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
 };
 
 export default Certification;

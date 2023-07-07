@@ -1,41 +1,20 @@
-import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  genericError,
-  getInitialTheme,
-  noConfigError,
-  notFoundError,
-  sanitizeConfig,
-  setupHotjar,
-  skeleton,
-  tooManyRequestError,
-  truncate,
-} from '../../../helpers/utils';
-import { formatDistance } from 'date-fns';
-import Experience from '../../experience';
-import Education from '../../education';
-import Certification from '../../certification';
-import { bgColor, cardBgColor } from '../../../assets/style-const';
+import { skeleton, truncate } from '../../../helpers/utils';
+import { cardBgColor } from '../../../assets/style-const';
 import { BtnBack } from '../../buttons/btn-back/BtnBack';
 import LazyImage from '../../lazy-image';
-import { AnimatePresence, motion, easeOut, usePresence } from 'framer-motion';
+import { motion, easeOut, usePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { Card } from '../../layout/card';
-import { routeVariants } from '../../layout/variants';
 import { AiOutlineArrowDown } from 'react-icons/ai';
-import { useConfigs, useExportConfigs } from '../../../helpers/useConfigs';
+import { LayoutContext } from '../../../context/LayoutContext';
 
 export const Project = () => {
-  const { allProjectsCardCoords } = useExportConfigs();
-  const [elementTopPos, setElementTopPos] = useState(0);
-  const { state, key } = useLocation();
+  const layoutContext = useContext(LayoutContext);
+  const { location, state, key, pathname } = useLocation();
   const project = state.project;
   const isVisible = state.isVisible;
-  const [theme, setTheme] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState(null);
-  const [repo, setRepo] = useState(null);
   const [isPresent, safeToRemove] = usePresence();
 
   useEffect(() => {
@@ -147,15 +126,6 @@ export const Project = () => {
     );
   };
 
-  useEffect(() => {
-    setElementTopPos(
-      document
-        .getElementById('project-page-' + project.title)
-        .getBoundingClientRect().top
-    );
-    console.log(allProjectsCardCoords);
-  }, []);
-
   return (
     <>
       {isVisible && (
@@ -172,7 +142,7 @@ export const Project = () => {
               },
             }}
             exit={{
-              y: state.position.y,
+              y: layoutContext.allProjectsCardDistance,
               transition: {
                 duration: 0.5,
                 ease: easeOut,
@@ -183,23 +153,28 @@ export const Project = () => {
             <div
               className={`card shadow-lg compact h-full grid grid-cols-2 gap-6 ${cardBgColor}`}
             >
-              <div className="col-span-2">
+              <motion.div
+                className="col-span-2"
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    ease: easeOut,
+                  },
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    duration: 0.5,
+                    ease: easeOut,
+                  },
+                }}
+              >
                 <div className="card p-5">
                   <div className="mx-3 flex items-center mb-2">
                     <div className="grid grid-cols-4 gap-6 mb-5">
                       <div className="col-span-1">
                         <BtnBack />
-                        <Link
-                          to={{
-                            pathname: '/',
-                          }}
-                          state={{
-                            comingFromSub: {
-                              prevPath: location.pathname,
-                              startingY: elementTopPos,
-                            },
-                          }}
-                        >
+                        <Link to="/" state={{ previousPath: pathname }}>
                           To home
                         </Link>
                       </div>
@@ -290,7 +265,7 @@ export const Project = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

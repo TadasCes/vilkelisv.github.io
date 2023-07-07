@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import HeadTagEditor from './head-tag-editor';
 import ErrorPage from './error-page';
 import ThemeChanger from './theme-changer';
@@ -30,43 +30,40 @@ import { BtnNavigate } from './buttons/btn-navigate/BtnNavigate';
 import { Menu } from './menu/Menu';
 import AllProjects from './Projects/all-projects';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useMainContainer } from './layout/card/useMainContainer';
 import { routeVariants } from './layout/variants';
-import {
-  Link,
-  unstable_HistoryRouter,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
-import { useConfigs } from '../helpers/useConfigs';
+import { useLocation } from 'react-router-dom';
+import { LayoutContext } from '../context/LayoutContext';
 
 let mainContainer;
 const Home = ({ config }) => {
-  const {
-    pageTopBorderCoords,
-    setPageTopBorderCoords,
-    allProjectsCardCoords,
-    setAllProjectsCardCoords,
-  } = useConfigs();
+  const layoutContext = useContext(LayoutContext);
   const location = useLocation();
-  const [previousPage, setPreviousPage] = useState('');
-  const [comingFromProjects, setComingFromProjects] = useState({});
-
-  // useEffect(() => {
-  //   setAllProjectsCardCoords({
-  //     y: document.getElementById('all-projects').getBoundingClientRect().top,
-  //   });
-  // }, [location]);
 
   useEffect(() => {
-    setPageTopBorderCoords(
-      document.getElementById('main-page-container').getBoundingClientRect().top
-    );
-  }, [location]);
+    layoutContext.topDistance = document
+      .getElementById('main-page-container')
+      .getBoundingClientRect().top;
+
+    layoutContext.layoutLoading = false;
+  }, []);
 
   useEffect(() => {
-    if (location.state.comingFromSub) setComingFromProjects(location.state);
-  }, [location]);
+    const onPageLoad = () => {
+      if (layoutContext.allProjectsCardDistance === 0) {
+        const tempDistance =
+          document.getElementById('all-projects').getBoundingClientRect().top -
+          layoutContext.topDistance;
+        layoutContext.allProjectsCardDistance = tempDistance;
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      return () => window.removeEventListener('load', onPageLoad);
+    }
+  }, []);
 
   mainContainer = useRef(null);
   const [error, setError] = useState(
@@ -76,7 +73,7 @@ const Home = ({ config }) => {
     typeof config === 'undefined' && !config ? null : sanitizeConfig(config)
   );
   const [theme, setTheme] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
   const [repo, setRepo] = useState(null);
 
@@ -182,7 +179,6 @@ const Home = ({ config }) => {
           social={sanitizedConfig.social}
         />
       )}
-      {/* <div className="m-auto fade-in h-screen w-3/4"> */}
       <motion.div className="m-auto h-screen w-4/4" key={'test'}>
         {error ? (
           <ErrorPage
@@ -194,8 +190,10 @@ const Home = ({ config }) => {
           sanitizedConfig && (
             <>
               {/* <Menu /> */}
-              <div ref={mainContainer} className={`p-4 lg:p-10 min-h-full`}>
-                <Link to={'/foo'}>To foo </Link>
+              <div
+                ref={mainContainer}
+                className={`p-4 lg:p-10 min-h-full ${bgColor}`}
+              >
                 <div
                   id="main-page-container"
                   className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
@@ -210,18 +208,9 @@ const Home = ({ config }) => {
                       />
                     </div>
                     <div className="grid col-span-6 lg:col-span-2 gap-6">
-                      <Experience
-                        loading={loading}
-                        experiences={sanitizedConfig.experiences}
-                      />
-                      <Education
-                        loading={loading}
-                        education={sanitizedConfig.education}
-                      />
-                      {/* <Certification
-                        loading={loading}
-                        certifications={sanitizedConfig.certifications}
-                      /> */}
+                      <Experience />
+                      <Education />
+                      <Certification />
                     </div>
                   </div>
                   <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
@@ -231,7 +220,6 @@ const Home = ({ config }) => {
                         projects={sanitizedConfig.externalProjects}
                         shownCount={3}
                         googleAnalytics={sanitizedConfig.googleAnalytics}
-                        comingFromSubPage={comingFromProjects}
                       />
                     </div>
                     {/* <div className="grid grid-cols-1 lg:grid-cols-1 col-span-2 gap-6">
@@ -243,30 +231,19 @@ const Home = ({ config }) => {
                       />
                     </div> */}
                   </div>
-                  {/* <div className="grid col-span-2 gap-6">
+                  <div className="grid col-span-2 gap-6">
                     <div className="grid gap-6">
                       <Skill
                         loading={loading}
                         skills={sanitizedConfig.skills}
                       />
                     </div>
-                    <Blog
-                      loading={loading}
-                      googleAnalytics={sanitizedConfig.googleAnalytics}
-                      blog={sanitizedConfig.blog}
-                    />
                   </div>
                   <div className="grid grid-cols-1 col-span-4 gap-6">
                     <div className="grid grid-cols-1 gap-6">
-                      <Details
-                        about={sanitizedConfig.about}
-                        profile={profile}
-                        loading={loading}
-                        github={sanitizedConfig.github}
-                        social={sanitizedConfig.social}
-                      />
+                      <Details />
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
               <footer

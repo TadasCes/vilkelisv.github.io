@@ -1,7 +1,10 @@
 import { skeleton } from '../../helpers/utils';
-import {} from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../layout/card';
+import dataConfig from '../../../data.configs';
+import { useLoadData } from '../../helpers/useLoadData';
+import { CardContent, CardTitle } from '../layout/card/card-components';
 
 const ListItem = ({ time, position, company, companyLink }) => (
   <li className="mb-5 ml-4">
@@ -19,7 +22,9 @@ const ListItem = ({ time, position, company, companyLink }) => (
   </li>
 );
 
-const Experience = ({ experiences, loading }) => {
+const Experience = () => {
+  const { loading, data: experiences } = useLoadData('experiences');
+
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 2; index++) {
@@ -47,16 +52,8 @@ const Experience = ({ experiences, loading }) => {
     <>
       {experiences?.length !== 0 && (
         <Card cardId="experiences">
-          <div className="mx-3" id="test">
-            <h5 className="card-title">
-              {loading ? (
-                skeleton({ width: 'w-32', height: 'h-8' })
-              ) : (
-                <span className="text-base-content opacity-70">Experience</span>
-              )}
-            </h5>
-          </div>
-          <div className="text-base-content text-opacity-60">
+          <CardTitle text={'Experience'} loading={loading} />
+          <CardContent>
             <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
               {loading ? (
                 renderSkeleton()
@@ -76,7 +73,7 @@ const Experience = ({ experiences, loading }) => {
                 </>
               )}
             </ol>
-          </div>
+          </CardContent>
         </Card>
       )}
     </>
@@ -88,11 +85,6 @@ ListItem.propTypes = {
   position: PropTypes.node,
   company: PropTypes.node,
   companyLink: PropTypes.string,
-};
-
-Experience.propTypes = {
-  experiences: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
 };
 
 export default Experience;
