@@ -14,42 +14,68 @@ const AvatarCard = ({ avatarRing, resume }) => {
   return (
     !loading && (
       <Card cardId="avatar">
-        <div className="grid place-items-start py-8">
-          {/* {loading ? (
-          <div className="avatar opacity-90">
-            <div className="mb-8 rounded-full w-32 h-32">
-              {skeleton({
-                width: 'w-full',
-                height: 'h-full',
-                shape: '',
-              })}
-            </div>
-          </div>
-        ) : (
-          <div className="avatar opacity-90">
-            <div className={`mb-8 w-96 h-96}`}>
+        <div className="grid place-items-center grid-cols-2 h-full py-8">
+          <div className="avatar opacity-90 col-span-2 md:col-span-1">
+            <div className={`mb-8 h-96 w-auto rounded`}>
               {
                 <LazyImage
-                  src={
-                    'https://lh6.googleusercontent.com/KdmN8dsGPKzbtODwJ6NcTzebGyQeOnfJdehtiaLE_ZuTpe5uW_XmHDJfzJOzSE8a5JRt5Z7visgHwH0'
-                  }
+                  src="../src/assets/profile2.jpg"
                   alt={profile.name}
                   placeholder={skeleton({
                     width: 'w-full',
                     height: 'h-full',
                     shape: '',
                   })}
+                  style={{
+                    width: '75%',
+                    margin: '0 auto',
+                    borderRadius: '5px',
+                  }}
                 />
               }
             </div>
           </div>
-        )} */}
-          <div className="text-left px-8">
-            <Headline text={profile.name} loading={loading} />
-            <Subheadline text={profile.bio} loading={loading} />
-            <BaseText text={profile.story} loading={loading} />
+          <div className="text-left py-10 col-span-2 md:col-span-1 mx-5 md:mx-0">
+            <div className={`font-bold text-2xl `}>
+              {loading ? (
+                skeleton({ width: 'w-48', height: 'h-8' })
+              ) : (
+                <h1 className={`text-5xl opacity-70 `}>{profile.name}</h1>
+              )}
+            </div>
+            <div className={`text-base-content opacity-60 font-mono mb-8`}>
+              {loading ? (
+                skeleton({ width: 'w-48', height: 'h-4' })
+              ) : (
+                <h4 className={``}>{profile.bio}</h4>
+              )}
+            </div>
+            <div
+              className={`text-base-content text-opacity-60 font-mono mr-10`}
+            >
+              {loading ? (
+                skeleton({ width: 'w-48', height: 'h-5' })
+              ) : (
+                <>
+                  <p className={`text-sm mb-2`}>
+                    ~3 years of combined programming experience.
+                  </p>
+                  <p className={`text-sm mb-2`}>
+                    Interested in everything between automation and
+                    illustration.
+                  </p>
+                  <p className={`text-sm mb-2`}>
+                    Self-learner, curious, team-player with the sense of
+                    ownership.
+                  </p>
+                </>
+              )}
+            </div>
+            {/* <Headline text={profile.name} loading={loading} /> */}
+            {/* <Subheadline text={profile.bio} loading={loading} /> */}
+            {/* <BaseText text={profile.story} loading={loading} /> */}
           </div>
-          {resume?.fileUrl &&
+          {/* {resume?.fileUrl &&
             (loading ? (
               <div className="mt-6">
                 {skeleton({ width: 'w-40', height: 'h-8' })}
@@ -64,7 +90,7 @@ const AvatarCard = ({ avatarRing, resume }) => {
               >
                 Download Resume
               </a>
-            ))}
+            ))} */}
         </div>
       </Card>
     )

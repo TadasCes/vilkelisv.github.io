@@ -10,7 +10,7 @@ import { cardBgColor } from '../../../assets/style-const';
 import dataConfig from '../../../../data.configs';
 import { CardTitle } from '../../layout/card/card-components';
 
-export const AllProjects = ({ shownCount }) => {
+export const AllProjects = () => {
   const projects = dataConfig.projects;
   const [loading, setLoading] = useState(true);
   const layoutContext = useContext(LayoutContext);
@@ -22,9 +22,11 @@ export const AllProjects = ({ shownCount }) => {
 
   useEffect(() => {
     setDistance(-Math.abs(layoutContext.allProjectsCardDistance));
-    setComingFromSubPage(
-      location.state.previousPath.includes('/projects/') ? true : false
-    );
+    // if (location.state.previousPath) {
+    //   setComingFromSubPage(
+    //     location.state.previousPath.includes('/projects/') ? true : false
+    //   );
+    // }
     triggerCustomAnimation;
     setLoading(false);
   }, [location]);
@@ -76,55 +78,26 @@ export const AllProjects = ({ shownCount }) => {
   };
 
   return (
-    <Card
-      cardId="all-projects"
-      customAnimation={
-        projectCardClicked || comingFromSubPage
-          ? motionConfigsFromSubTest
-          : false
-      }
-    >
-      <motion.div
-        initial={projectCardClicked || comingFromSubPage ? { opacity: 0 } : {}}
-        animate={
-          projectCardClicked || comingFromSubPage
-            ? {
-                opacity: 1,
-                transition: { duration: 0.3, ease: easeOut, delay: 0.2 },
-              }
-            : {}
-        }
-        exit={
-          projectCardClicked || comingFromSubPage
-            ? { opacity: 0, transition: { ...customTransition, delay: 0.5 } }
-            : {}
-        }
-      >
-        <CardTitle text={'Projects'} loading={loading} big={true} />
-        <div className="col-span-2 gap-6 ">
-          <div className="p-5">
-            {projects.map((item, index) =>
-              index < shownCount ? (
-                <ProjectCard
-                  key={index}
-                  loading={loading}
-                  project={item}
-                  projectCardClicked={setProjectCardClicked}
-                />
-              ) : (
-                ''
-              )
-            )}
-          </div>
+    <Card cardId="all-projects">
+      <CardTitle text={'Projects'} loading={loading} big={true} />
+      <div className="col-span-2 gap-6 ">
+        <div className="p-5 grid grid-cols-3 gap-6">
+          {projects.map((item, index) => (
+            <ProjectCard
+              key={index}
+              loading={loading}
+              project={item}
+              projectCardClicked={setProjectCardClicked}
+            />
+          ))}
         </div>
-      </motion.div>
+      </div>
     </Card>
   );
 };
 
 AllProjects.propTypes = {
   projects: PropTypes.array,
-  shownCount: PropTypes.number,
   loading: PropTypes.bool,
   comingFromSubPage: PropTypes.any,
 };

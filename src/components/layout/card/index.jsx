@@ -16,7 +16,7 @@ export const Card = ({ children, loading, cardId, customAnimation }) => {
 
   const transition = {
     duration: 0.5,
-    delay: Math.random() * (0.6 - 0.2) + 0.2,
+    delay: Math.random() * (0.3 - 0.1) + 0.1,
     ease: easeOut,
   };
 
@@ -56,7 +56,7 @@ export const Card = ({ children, loading, cardId, customAnimation }) => {
   }, []);
 
   return (
-    <div id={cardId}>
+    <div id={cardId} className="h-full">
       {!configLoading && (
         <motion.div
           className={`card shadow-lg compact h-full  ${

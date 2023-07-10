@@ -21,7 +21,9 @@ export const CardTitle = ({ text, loading, big, layoutStyle, textStyle }) => {
 
 export const CardContent = ({ children, loading, layoutStyle }) => {
   return (
-    <div className="text-base-content text-opacity-60 p-2 mx-2 my-2">
+    <div
+      className={`text-base-content text-opacity-60 p-2 mx-2 my-2 ${layoutStyle}`}
+    >
       {children}
     </div>
   );

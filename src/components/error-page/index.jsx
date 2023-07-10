@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types';
+import { BtnNavigate } from '../buttons/btn-navigate/BtnNavigate';
 
-const ErrorPage = (props) => {
+const ErrorPage = () => {
   return (
     <div className="min-w-screen min-h-screen bg-base-200 flex items-center p-5 lg:p-20 overflow-hidden relative">
       <div className="flex-1 min-h-full min-w-full rounded-3xl bg-base-100 shadow-xl p-10 lg:p-20 text-gray-800 relative md:flex items-center text-center md:text-left">
         <div className="w-full">
           <div className="mb-10 md:mb-20 mt-10 md:mt-20 text-gray-600 font-light">
             <h1 className="font-black uppercase text-3xl lg:text-5xl text-primary mb-10">
-              {props.status}
+              404
             </h1>
-            <p className="text-lg pb-2 text-base-content">{props.title}</p>
+            <p className="text-lg pb-2 text-base-content">
+              This page does not exist :/
+            </p>
             <div className="text-base-content text-opacity-60">
-              {props.subTitle}
+              <BtnNavigate destinationUrl={'/'} title={'Home page'} />
             </div>
           </div>
         </div>
@@ -20,12 +23,6 @@ const ErrorPage = (props) => {
       <div className="w-96 h-full bg-secondary bg-opacity-10 absolute -bottom-96 right-64 rounded-full pointer-events-none -rotate-45 transform"></div>
     </div>
   );
-};
-
-ErrorPage.propTypes = {
-  status: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  subTitle: PropTypes.node.isRequired,
 };
 
 export default ErrorPage;

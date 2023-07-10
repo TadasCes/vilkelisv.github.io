@@ -5,6 +5,7 @@ import { Card } from '../layout/card';
 import dataConfig from '../../../data.configs';
 import { useLoadData } from '../../helpers/useLoadData';
 import { CardContent, CardTitle } from '../layout/card/card-components';
+import { FaLinkedin } from 'react-icons/fa';
 
 const ListItem = ({ time, position, company, companyLink }) => (
   <li className="mb-5 ml-4">
@@ -73,6 +74,16 @@ const Experience = () => {
                 </>
               )}
             </ol>
+            <a
+              href={'https://www.linkedin.com/in/vainius-vilkelis/'}
+              target="_blank"
+              rel="noreferrer"
+              className="flex justify-start px-1 items-center"
+            >
+              <div className="flex-grow font-medium gap-2 flex items-center my-1">
+                More on: <FaLinkedin size={'24px'} />
+              </div>
+            </a>
           </CardContent>
         </Card>
       )}

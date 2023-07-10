@@ -179,7 +179,7 @@ const Home = ({ config }) => {
           social={sanitizedConfig.social}
         />
       )}
-      <motion.div className="m-auto h-screen w-4/4" key={'test'}>
+      <motion.div className="m-auto h-full w-full">
         {error ? (
           <ErrorPage
             status={`${error.status}`}
@@ -190,27 +190,40 @@ const Home = ({ config }) => {
           sanitizedConfig && (
             <>
               {/* <Menu /> */}
-              <div
-                ref={mainContainer}
-                className={`p-4 lg:p-10 min-h-full ${bgColor}`}
-              >
+              <div ref={mainContainer} className={`  ${bgColor}`}>
                 <div
                   id="main-page-container"
                   className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
-                    <div className="grid col-span-6 lg:col-span-4 gap-6">
-                      <AvatarCard
-                        profile={profile}
-                        loading={loading}
-                        avatarRing={!sanitizedConfig.themeConfig.hideAvatarRing}
-                        resume={sanitizedConfig.resume}
-                      />
+                    <div className="grid col-span-6 lg:col-span-4 gap-6 grid-rows-4">
+                      <div className="row-span-3">
+                        <AvatarCard
+                          profile={profile}
+                          loading={loading}
+                          avatarRing={
+                            !sanitizedConfig.themeConfig.hideAvatarRing
+                          }
+                          resume={sanitizedConfig.resume}
+                        />
+                      </div>
+                      <div className="row-span-1">
+                        <Skill
+                          loading={loading}
+                          skills={sanitizedConfig.skills}
+                        />
+                      </div>
                     </div>
-                    <div className="grid col-span-6 lg:col-span-2 gap-6">
-                      <Experience />
-                      <Education />
-                      <Certification />
+                    <div className="grid col-span-6 lg:col-span-2 gap-6 grid-rows-4">
+                      <div className="row-span-2">
+                        <Experience />
+                      </div>
+                      <div className="row-span-1">
+                        <Education />
+                      </div>
+                      <div className="row-span-1">
+                        <Certification />
+                      </div>
                     </div>
                   </div>
                   <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
@@ -218,7 +231,6 @@ const Home = ({ config }) => {
                       <AllProjects
                         loading={loading}
                         projects={sanitizedConfig.externalProjects}
-                        shownCount={3}
                         googleAnalytics={sanitizedConfig.googleAnalytics}
                       />
                     </div>
@@ -231,28 +243,13 @@ const Home = ({ config }) => {
                       />
                     </div> */}
                   </div>
-                  <div className="grid col-span-2 gap-6">
-                    <div className="grid gap-6">
-                      <Skill
-                        loading={loading}
-                        skills={sanitizedConfig.skills}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 col-span-4 gap-6">
+                  <div className="grid grid-cols-1 col-span-6 gap-6">
                     <div className="grid grid-cols-1 gap-6">
                       <Details />
                     </div>
                   </div>
                 </div>
               </div>
-              <footer
-                className={`p-4 footer ${bgColor} text-base-content footer-center`}
-              >
-                <div className="card compact bg-base-100 shadow">
-                  <Footer content={sanitizedConfig.footer} loading={loading} />
-                </div>
-              </footer>
             </>
           )
         )}

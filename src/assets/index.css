@@ -35,6 +35,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
