@@ -13,9 +13,6 @@ export const useAllProjects = () => {
 
   useEffect(() => {
     setDistance(-Math.abs(layoutContext.allProjectsCardDistance));
-    setComingFromSubPage(
-      location.state.previousPath.includes('/projects/') ? true : false
-    );
     triggerCustomAnimation;
   }, [location]);
 

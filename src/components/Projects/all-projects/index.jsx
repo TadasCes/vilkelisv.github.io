@@ -22,11 +22,7 @@ export const AllProjects = () => {
 
   useEffect(() => {
     setDistance(-Math.abs(layoutContext.allProjectsCardDistance));
-    // if (location.state.previousPath) {
-    //   setComingFromSubPage(
-    //     location.state.previousPath.includes('/projects/') ? true : false
-    //   );
-    // }
+
     triggerCustomAnimation;
     setLoading(false);
   }, [location]);

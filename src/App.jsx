@@ -10,13 +10,6 @@ import { bgColor } from './assets/style-const';
 import ErrorPage from './components/error-page';
 
 function App() {
-  const location = useLocation();
-  useEffect(() => {
-    if (location.state) {
-      location.state.previousPath = '/';
-    }
-  }, []);
-
   return (
     <div className={`${bgColor} min-h-screen h-full`}>
       <div className={`p-10 xl:p-10 min-h-full xl:w-3/4 xl:mx-auto`}>

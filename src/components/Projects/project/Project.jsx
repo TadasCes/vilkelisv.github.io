@@ -175,11 +175,7 @@ export const Project = () => {
                   <div className="mx-3 flex items-center mb-2">
                     <div className="grid grid-cols-4 gap-6 mb-5">
                       <div className="col-span-1">
-                        <BtnNavigate
-                          title="Back"
-                          destinationUrl={'/'}
-                          previousPath={pathname}
-                        />
+                        <BtnNavigate title="Back" destinationUrl={'/'} />
                       </div>
                       <div className="col-span-3">
                         <h5 className="text-center card-title">
