@@ -4,8 +4,6 @@ import LazyImage from '../lazy-image';
 import { Card } from '../layout/card';
 
 const AvatarCard = ({ loading, data }) => {
-  console.log(data);
-  console.log(loading);
   return (
     !loading && (
       <Card cardId="avatar">

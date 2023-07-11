@@ -50,7 +50,7 @@ const Skill = ({ loading, data }) => {
 
 Skill.propTypes = {
   loading: PropTypes.bool,
-  data: PropTypes.object,
+  data: PropTypes.array,
 };
 
 export default Skill;

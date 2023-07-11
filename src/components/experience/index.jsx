@@ -98,7 +98,7 @@ ListItem.propTypes = {
 
 Experience.propTypes = {
   loading: PropTypes.bool,
-  data: PropTypes.object,
+  data: PropTypes.array,
 };
 
 export default Experience;

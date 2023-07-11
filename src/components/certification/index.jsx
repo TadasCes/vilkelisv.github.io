@@ -84,7 +84,7 @@ ListItem.propTypes = {
 
 Certification.propTypes = {
   loading: PropTypes.bool,
-  data: PropTypes.object,
+  data: PropTypes.array,
 };
 
 export default Certification;
