@@ -7,7 +7,7 @@ export const useLoadData = (field) => {
 
   useEffect(() => {
     setData(dataConfig[field]);
-
+    console.log(dataConfig);
     return () => {
       setLoading(false);
     };
