@@ -18,7 +18,6 @@ export const ProjectCard = ({ project, projectCardClicked }) => {
   const state = {
     project: project,
     isVisible: true,
-    position: {},
   };
 
   const defaultAnimation = {
@@ -67,10 +66,10 @@ export const ProjectCard = ({ project, projectCardClicked }) => {
       initial={motionConfig.initial}
       animate={motionConfig.animate}
       exit={motionConfig.exit}
-      className="col-span-3 md:col-span-1"
+      className="col-span-3 md:col-span-1 hover:scale-105 transition ease-in-out duration-150 shadow-md hover:shadow-lg "
     >
       <Link
-        className={`card shadow-lg compact cursor-pointer mb-5 ${cardBgColor}`}
+        className={`card  compact cursor-pointer ${cardBgColor} `}
         key={project.title}
         to={'/projects/' + project.id}
         state={state}

@@ -14,6 +14,7 @@ import { CardContent, CardTitle } from '../../layout/card/card-components';
 export const Project = () => {
   const layoutContext = useContext(LayoutContext);
   const { location, state, key, pathname } = useLocation();
+  console.log(state);
   const project = state.project;
   const isVisible = state.isVisible;
   const [loading, setLoading] = useState(false);

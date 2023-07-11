@@ -10,9 +10,16 @@ import { bgColor } from './assets/style-const';
 import ErrorPage from './components/error-page';
 
 function App() {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state) {
+      location.state.previousPath = '/';
+    }
+  }, []);
+
   return (
     <div className={`${bgColor} min-h-screen h-full`}>
-      <div className={`p-10 xl:p-10 min-h-full xl:w-3/4 xl:mx-auto`}>
+      <div className={`p-10 2xl:p-10 min-h-full 2xl:w-3/4 2xl:mx-auto`}>
         <AnimatePresence mode="wait" initial={true}>
           <Routes location={location} key={location.key}>
             <Route path="/projects/:id" element={<Project />} />

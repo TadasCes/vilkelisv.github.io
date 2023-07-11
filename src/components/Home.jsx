@@ -179,7 +179,7 @@ const Home = ({ config }) => {
           social={sanitizedConfig.social}
         />
       )}
-      <motion.div className="m-auto h-full w-full">
+      <div className="m-auto h-full w-full">
         {error ? (
           <ErrorPage
             status={`${error.status}`}
@@ -189,7 +189,6 @@ const Home = ({ config }) => {
         ) : (
           sanitizedConfig && (
             <>
-              {/* <Menu /> */}
               <div ref={mainContainer} className={`  ${bgColor}`}>
                 <div
                   id="main-page-container"
@@ -234,14 +233,6 @@ const Home = ({ config }) => {
                         googleAnalytics={sanitizedConfig.googleAnalytics}
                       />
                     </div>
-                    {/* <div className="grid grid-cols-1 lg:grid-cols-1 col-span-2 gap-6">
-                      <GithubProject
-                        repo={repo}
-                        loading={loading}
-                        github={sanitizedConfig.github}
-                        googleAnalytics={sanitizedConfig.googleAnalytics}
-                      />
-                    </div> */}
                   </div>
                   <div className="grid grid-cols-1 col-span-6 gap-6">
                     <div className="grid grid-cols-1 gap-6">
@@ -253,7 +244,7 @@ const Home = ({ config }) => {
             </>
           )
         )}
-      </motion.div>
+      </div>
     </HelmetProvider>
   );
 };
