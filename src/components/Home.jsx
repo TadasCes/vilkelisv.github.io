@@ -36,8 +36,10 @@ const Home = ({ config }) => {
       <HelmetProvider>
         <HeadTagEditor />
         <h4>test</h4>
+        {console.log(loading)}
         {!loading && (
           <div className="m-auto h-full w-full">
+            <h4>test2</h4>
             {error ? (
               <ErrorPage
                 status={`${error.status}`}
