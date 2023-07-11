@@ -12,6 +12,8 @@ import '../assets/index.css';
 import { bgColor } from '../assets/style-const';
 import AllProjects from './Projects/all-projects';
 import dataConfig from '../../data.configs';
+import { HelmetProvider } from 'react-helmet-async';
+import HeadTagEditor from './head-tag-editor';
 
 let mainContainer;
 const Home = ({ config }) => {
@@ -30,7 +32,8 @@ const Home = ({ config }) => {
   }, []);
 
   return (
-    <>
+    <HelmetProvider>
+      <HeadTagEditor />
       {!loading && (
         <div className="m-auto h-full w-full">
           {error ? (
@@ -92,7 +95,7 @@ const Home = ({ config }) => {
           )}
         </div>
       )}
-    </>
+    </HelmetProvider>
   );
 };
 
