@@ -10,7 +10,7 @@ import { cardBgColor } from '../../../assets/style-const';
 import dataConfig from '../../../../data.configs';
 import { CardTitle } from '../../layout/card/card-components';
 
-export const AllProjects = () => {
+export const AllProjects = ({ data }) => {
   const projects = dataConfig.projects;
   const [loading, setLoading] = useState(true);
   const layoutContext = useContext(LayoutContext);
@@ -24,7 +24,9 @@ export const AllProjects = () => {
     setDistance(-Math.abs(layoutContext.allProjectsCardDistance));
 
     triggerCustomAnimation;
-    setLoading(false);
+    if (data) {
+      setLoading(false);
+    }
   }, [location]);
 
   const customTransition = {
@@ -97,9 +99,8 @@ export const AllProjects = () => {
 };
 
 AllProjects.propTypes = {
-  projects: PropTypes.array,
+  data: PropTypes.array,
   loading: PropTypes.bool,
-  comingFromSubPage: PropTypes.any,
 };
 
 export default AllProjects;

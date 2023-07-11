@@ -2,7 +2,6 @@ import { skeleton } from '../../helpers/utils';
 import {} from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../layout/card';
-import { useLoadData } from '../../helpers/useLoadData';
 import { CardContent, CardTitle } from '../layout/card/card-components';
 
 const ListItem = ({ time, degree, institution }) => (
@@ -17,9 +16,7 @@ const ListItem = ({ time, degree, institution }) => (
   </li>
 );
 
-const Education = () => {
-  const { loading, data: education } = useLoadData('education');
-
+const Education = ({ loading, data }) => {
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 2; index++) {
@@ -45,12 +42,12 @@ const Education = () => {
 
   return (
     <>
-      {!loading && education?.length !== 0 && (
+      {!loading && data?.length !== 0 && (
         <Card cardId="education">
           <CardTitle text={'Education'} loading={loading} />
           <CardContent>
             <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-              {education.map((item, index) => (
+              {data.map((item, index) => (
                 <ListItem
                   key={index}
                   time={`${item.from} - ${item.to}`}
@@ -70,6 +67,11 @@ ListItem.propTypes = {
   time: PropTypes.node,
   degree: PropTypes.node,
   institution: PropTypes.node,
+};
+
+Education.propTypes = {
+  loading: PropTypes.bool,
+  data: PropTypes.object,
 };
 
 export default Education;

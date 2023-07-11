@@ -68,9 +68,7 @@ const ListItem = ({ icon, title, value, link, skeleton = false }) => {
     </a>
   );
 };
-const Details = () => {
-  const { loading, data: details } = useLoadData('details');
-
+const Details = ({ loading, data }) => {
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 4; index++) {
@@ -101,43 +99,45 @@ const Details = () => {
                 <CardContent>
                   <div className="w-full h-full">
                     <div className="pb-5 pr-20">
-                      <span>{details.story}</span>
+                      <span>{data.story}</span>
                     </div>
-                    {details.location && (
+                    {data.location && (
                       <ListItem
                         icon={<MdLocationOn />}
                         title="Based in:"
-                        value={details.location}
+                        value={data.location}
                       />
                     )}
-                    <ListItem
-                      icon={<AiFillGithub />}
-                      title="GitHub:"
-                      value={details.github}
-                      link={`https://github.com/${details.github}`}
-                    />
-                    {details.linkedin && (
+                    {data.github && (
+                      <ListItem
+                        icon={<AiFillGithub />}
+                        title="GitHub:"
+                        value={data.github}
+                        link={`https://github.com/${data.github}`}
+                      />
+                    )}
+                    {data.linkedin && (
                       <ListItem
                         icon={<FaLinkedin />}
                         title="LinkedIn:"
-                        value={details.linkedin}
-                        link={`https://www.linkedin.com/in/${details.linkedin}`}
+                        value={data.linkedin}
+                        link={`https://www.linkedin.com/in/${data.linkedin}`}
                       />
                     )}
-                    {details?.phone && (
+                    {data.phone && (
                       <ListItem
                         icon={<RiPhoneFill />}
                         title="Phone:"
-                        value={details.phone}
-                        link={`tel:${details.phone}`}
+                        value={data.phone}
+                        link={`tel:${data.phone}`}
                       />
                     )}
-                    {details?.email && (
+                    {data.email && (
                       <ListItem
                         icon={<RiMailFill />}
                         title="Email:"
-                        value={details.email}
-                        link={`mailto:${details.email}`}
+                        value={data.email}
+                        link={`mailto:${data.email}`}
                       />
                     )}
                   </div>
@@ -157,6 +157,11 @@ ListItem.propTypes = {
   value: PropTypes.node,
   link: PropTypes.string,
   skeleton: PropTypes.bool,
+};
+
+Details.propTypes = {
+  loading: PropTypes.bool,
+  data: PropTypes.object,
 };
 
 export default Details;

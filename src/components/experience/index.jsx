@@ -23,9 +23,7 @@ const ListItem = ({ time, position, company, companyLink }) => (
   </li>
 );
 
-const Experience = () => {
-  const { loading, data: experiences } = useLoadData('experiences');
-
+const Experience = ({ loading, data }) => {
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 2; index++) {
@@ -51,7 +49,7 @@ const Experience = () => {
 
   return (
     <>
-      {!loading && experiences?.length !== 0 && (
+      {!loading && data?.length !== 0 && (
         <Card cardId="experiences">
           <CardTitle text={'Experience'} loading={loading} />
           <CardContent>
@@ -60,7 +58,7 @@ const Experience = () => {
                 renderSkeleton()
               ) : (
                 <>
-                  {experiences.map((experience, index) => (
+                  {data.map((experience, index) => (
                     <ListItem
                       key={index}
                       time={`${experience.from} - ${experience.to}`}
@@ -96,6 +94,11 @@ ListItem.propTypes = {
   position: PropTypes.node,
   company: PropTypes.node,
   companyLink: PropTypes.string,
+};
+
+Experience.propTypes = {
+  loading: PropTypes.bool,
+  data: PropTypes.object,
 };
 
 export default Experience;

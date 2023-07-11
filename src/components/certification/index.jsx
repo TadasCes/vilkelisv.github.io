@@ -21,9 +21,7 @@ const ListItem = ({ year, name, body, link }) => (
   </li>
 );
 
-const Certification = () => {
-  const { loading, data: certifications } = useLoadData('certifications');
-
+const Certification = ({ loading, data }) => {
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 2; index++) {
@@ -49,7 +47,7 @@ const Certification = () => {
 
   return (
     <>
-      {!loading && certifications?.length !== 0 && (
+      {!loading && data?.length !== 0 && (
         <Card cardId={'certifications'}>
           <CardTitle text={'Certifications'} loading={loading} />
           <CardContent>
@@ -58,7 +56,7 @@ const Certification = () => {
                 renderSkeleton()
               ) : (
                 <>
-                  {certifications.map((certification, index) => (
+                  {data.map((certification, index) => (
                     <ListItem
                       key={index}
                       year={`${certification.year}`}
@@ -82,6 +80,11 @@ ListItem.propTypes = {
   name: PropTypes.node,
   body: PropTypes.node,
   link: PropTypes.string,
+};
+
+Certification.propTypes = {
+  loading: PropTypes.bool,
+  data: PropTypes.object,
 };
 
 export default Certification;

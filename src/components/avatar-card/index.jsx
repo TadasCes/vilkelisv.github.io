@@ -1,16 +1,11 @@
-/* eslint-disable react/prop-types */
 import PropTypes from 'prop-types';
-import { fallbackImage, skeleton } from '../../helpers/utils';
+import { skeleton } from '../../helpers/utils';
 import LazyImage from '../lazy-image';
 import { Card } from '../layout/card';
-import { useEffect, useState } from 'react';
-import dataConfig from '../../../data.configs';
-import { BaseText, Headline, Subheadline } from '../text-components';
-import { useLoadData } from '../../helpers/useLoadData';
 
-const AvatarCard = ({ avatarRing, resume }) => {
-  const { loading, data: profile } = useLoadData('about');
-
+const AvatarCard = ({ loading, data }) => {
+  console.log(data);
+  console.log(loading);
   return (
     !loading && (
       <Card cardId="avatar">
@@ -20,7 +15,7 @@ const AvatarCard = ({ avatarRing, resume }) => {
               {
                 <LazyImage
                   src="../src/assets/profile2.jpg"
-                  alt={profile.name}
+                  alt={data.name}
                   placeholder={skeleton({
                     width: 'w-full',
                     height: 'h-full',
@@ -40,14 +35,14 @@ const AvatarCard = ({ avatarRing, resume }) => {
               {loading ? (
                 skeleton({ width: 'w-48', height: 'h-8' })
               ) : (
-                <h1 className={`text-5xl opacity-70 `}>{profile.name}</h1>
+                <h1 className={`text-5xl opacity-70 `}>{data.name}</h1>
               )}
             </div>
             <div className={`text-base-content opacity-60 font-mono mb-8`}>
               {loading ? (
                 skeleton({ width: 'w-48', height: 'h-4' })
               ) : (
-                <h4 className={``}>{profile.bio}</h4>
+                <h4 className={``}>{data.bio}</h4>
               )}
             </div>
             <div
@@ -71,26 +66,7 @@ const AvatarCard = ({ avatarRing, resume }) => {
                 </>
               )}
             </div>
-            {/* <Headline text={profile.name} loading={loading} /> */}
-            {/* <Subheadline text={profile.bio} loading={loading} /> */}
-            {/* <BaseText text={profile.story} loading={loading} /> */}
           </div>
-          {/* {resume?.fileUrl &&
-            (loading ? (
-              <div className="mt-6">
-                {skeleton({ width: 'w-40', height: 'h-8' })}
-              </div>
-            ) : (
-              <a
-                href={resume.fileUrl}
-                target="_blank"
-                className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
-                download
-                rel="noreferrer"
-              >
-                Download Resume
-              </a>
-            ))} */}
         </div>
       </Card>
     )
@@ -98,12 +74,8 @@ const AvatarCard = ({ avatarRing, resume }) => {
 };
 
 AvatarCard.propTypes = {
-  profile: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
-  avatarRing: PropTypes.bool.isRequired,
-  resume: PropTypes.shape({
-    fileUrl: PropTypes.string,
-  }),
+  loading: PropTypes.bool,
+  data: PropTypes.object,
 };
 
 export default AvatarCard;
