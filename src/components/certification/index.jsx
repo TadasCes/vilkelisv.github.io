@@ -49,7 +49,7 @@ const Certification = () => {
 
   return (
     <>
-      {certifications?.length !== 0 && (
+      {!loading && certifications?.length !== 0 && (
         <Card cardId={'certifications'}>
           <CardTitle text={'Certifications'} loading={loading} />
           <CardContent>

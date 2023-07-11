@@ -23,7 +23,7 @@ const Skill = () => {
 
   return (
     <>
-      {skills?.length !== 0 && (
+      {!loading && skills?.length !== 0 && (
         <Card cardId="skills">
           {/* Add on hover tool tip explaining more about what I know about this topic */}
           <CardTitle text={'Skills'} loading={loading} />

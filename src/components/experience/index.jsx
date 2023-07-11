@@ -51,7 +51,7 @@ const Experience = () => {
 
   return (
     <>
-      {experiences?.length !== 0 && (
+      {!loading && experiences?.length !== 0 && (
         <Card cardId="experiences">
           <CardTitle text={'Experience'} loading={loading} />
           <CardContent>

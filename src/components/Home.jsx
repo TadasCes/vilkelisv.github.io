@@ -82,6 +82,7 @@ const Home = ({ config }) => {
       setTheme(getInitialTheme(sanitizedConfig.themeConfig));
       setupHotjar(sanitizedConfig.hotjar);
       // loadData();
+      setLoading(false);
     }
   }, [sanitizedConfig]);
 
@@ -179,72 +180,76 @@ const Home = ({ config }) => {
           social={sanitizedConfig.social}
         />
       )}
-      <div className="m-auto h-full w-full">
-        {error ? (
-          <ErrorPage
-            status={`${error.status}`}
-            title={error.title}
-            subTitle={error.subTitle}
-          />
-        ) : (
-          sanitizedConfig && (
-            <>
-              <div ref={mainContainer} className={`  ${bgColor}`}>
-                <div
-                  id="main-page-container"
-                  className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
-                    <div className="grid col-span-6 lg:col-span-4 gap-6 grid-rows-4">
-                      <div className="row-span-3">
-                        <AvatarCard
-                          profile={profile}
-                          loading={loading}
-                          avatarRing={
-                            !sanitizedConfig.themeConfig.hideAvatarRing
-                          }
-                          resume={sanitizedConfig.resume}
-                        />
+      {!loading && (
+        <>
+          <div className="m-auto h-full w-full">
+            {error ? (
+              <ErrorPage
+                status={`${error.status}`}
+                title={error.title}
+                subTitle={error.subTitle}
+              />
+            ) : (
+              sanitizedConfig && (
+                <>
+                  <div ref={mainContainer} className={`  ${bgColor}`}>
+                    <div
+                      id="main-page-container"
+                      className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
+                    >
+                      <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
+                        <div className="grid col-span-6 lg:col-span-4 gap-6 grid-rows-4">
+                          <div className="row-span-3">
+                            <AvatarCard
+                              profile={profile}
+                              loading={loading}
+                              avatarRing={
+                                !sanitizedConfig.themeConfig.hideAvatarRing
+                              }
+                              resume={sanitizedConfig.resume}
+                            />
+                          </div>
+                          <div className="row-span-1">
+                            <Skill
+                              loading={loading}
+                              skills={sanitizedConfig.skills}
+                            />
+                          </div>
+                        </div>
+                        <div className="grid col-span-6 lg:col-span-2 gap-6 grid-rows-4">
+                          <div className="row-span-2">
+                            <Experience />
+                          </div>
+                          <div className="row-span-1">
+                            <Education />
+                          </div>
+                          <div className="row-span-1">
+                            <Certification />
+                          </div>
+                        </div>
                       </div>
-                      <div className="row-span-1">
-                        <Skill
-                          loading={loading}
-                          skills={sanitizedConfig.skills}
-                        />
+                      <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
+                        <div className="grid col-span-6 gap-6">
+                          <AllProjects
+                            loading={loading}
+                            projects={sanitizedConfig.externalProjects}
+                            googleAnalytics={sanitizedConfig.googleAnalytics}
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="grid col-span-6 lg:col-span-2 gap-6 grid-rows-4">
-                      <div className="row-span-2">
-                        <Experience />
-                      </div>
-                      <div className="row-span-1">
-                        <Education />
-                      </div>
-                      <div className="row-span-1">
-                        <Certification />
+                      <div className="grid grid-cols-1 col-span-6 gap-6">
+                        <div className="grid grid-cols-1 gap-6">
+                          <Details />
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
-                    <div className="grid col-span-6 gap-6">
-                      <AllProjects
-                        loading={loading}
-                        projects={sanitizedConfig.externalProjects}
-                        googleAnalytics={sanitizedConfig.googleAnalytics}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 col-span-6 gap-6">
-                    <div className="grid grid-cols-1 gap-6">
-                      <Details />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          )
-        )}
-      </div>
+                </>
+              )
+            )}
+          </div>
+        </>
+      )}
     </HelmetProvider>
   );
 };

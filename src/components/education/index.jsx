@@ -45,7 +45,7 @@ const Education = () => {
 
   return (
     <>
-      {education?.length !== 0 && (
+      {!loading && education?.length !== 0 && (
         <Card cardId="education">
           <CardTitle text={'Education'} loading={loading} />
           <CardContent>

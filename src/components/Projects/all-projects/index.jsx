@@ -74,21 +74,25 @@ export const AllProjects = () => {
   };
 
   return (
-    <Card cardId="all-projects">
-      <CardTitle text={'Projects'} loading={loading} big={true} />
-      <div className="col-span-2 gap-6 ">
-        <div className="p-5 grid grid-cols-3 gap-6">
-          {projects.map((item, index) => (
-            <ProjectCard
-              key={index}
-              loading={loading}
-              project={item}
-              projectCardClicked={setProjectCardClicked}
-            />
-          ))}
-        </div>
-      </div>
-    </Card>
+    <>
+      {!loading && (
+        <Card cardId="all-projects">
+          <CardTitle text={'Projects'} loading={loading} big={true} />
+          <div className="col-span-2 gap-6 ">
+            <div className="p-5 grid grid-cols-3 gap-6">
+              {projects.map((item, index) => (
+                <ProjectCard
+                  key={index}
+                  loading={loading}
+                  project={item}
+                  projectCardClicked={setProjectCardClicked}
+                />
+              ))}
+            </div>
+          </div>
+        </Card>
+      )}
+    </>
   );
 };
 

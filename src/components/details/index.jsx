@@ -89,61 +89,65 @@ const Details = () => {
   };
 
   return (
-    <Card cardId={'details'}>
-      <div className="text-base-content text-opacity-60">
-        {loading ? (
-          renderSkeleton()
-        ) : (
-          <>
-            <CardTitle text={'About me'} loading={loading} />
-            <CardContent>
-              <div className="w-full h-full">
-                <div className="pb-5 pr-20">
-                  <span>{details.story}</span>
-                </div>
-                {details.location && (
-                  <ListItem
-                    icon={<MdLocationOn />}
-                    title="Based in:"
-                    value={details.location}
-                  />
-                )}
-                <ListItem
-                  icon={<AiFillGithub />}
-                  title="GitHub:"
-                  value={details.github}
-                  link={`https://github.com/${details.github}`}
-                />
-                {details.linkedin && (
-                  <ListItem
-                    icon={<FaLinkedin />}
-                    title="LinkedIn:"
-                    value={details.linkedin}
-                    link={`https://www.linkedin.com/in/${details.linkedin}`}
-                  />
-                )}
-                {details?.phone && (
-                  <ListItem
-                    icon={<RiPhoneFill />}
-                    title="Phone:"
-                    value={details.phone}
-                    link={`tel:${details.phone}`}
-                  />
-                )}
-                {details?.email && (
-                  <ListItem
-                    icon={<RiMailFill />}
-                    title="Email:"
-                    value={details.email}
-                    link={`mailto:${details.email}`}
-                  />
-                )}
-              </div>
-            </CardContent>
-          </>
-        )}
-      </div>
-    </Card>
+    <>
+      {!loading && (
+        <Card cardId={'details'}>
+          <div className="text-base-content text-opacity-60">
+            {loading ? (
+              renderSkeleton()
+            ) : (
+              <>
+                <CardTitle text={'About me'} loading={loading} />
+                <CardContent>
+                  <div className="w-full h-full">
+                    <div className="pb-5 pr-20">
+                      <span>{details.story}</span>
+                    </div>
+                    {details.location && (
+                      <ListItem
+                        icon={<MdLocationOn />}
+                        title="Based in:"
+                        value={details.location}
+                      />
+                    )}
+                    <ListItem
+                      icon={<AiFillGithub />}
+                      title="GitHub:"
+                      value={details.github}
+                      link={`https://github.com/${details.github}`}
+                    />
+                    {details.linkedin && (
+                      <ListItem
+                        icon={<FaLinkedin />}
+                        title="LinkedIn:"
+                        value={details.linkedin}
+                        link={`https://www.linkedin.com/in/${details.linkedin}`}
+                      />
+                    )}
+                    {details?.phone && (
+                      <ListItem
+                        icon={<RiPhoneFill />}
+                        title="Phone:"
+                        value={details.phone}
+                        link={`tel:${details.phone}`}
+                      />
+                    )}
+                    {details?.email && (
+                      <ListItem
+                        icon={<RiMailFill />}
+                        title="Email:"
+                        value={details.email}
+                        link={`mailto:${details.email}`}
+                      />
+                    )}
+                  </div>
+                </CardContent>
+              </>
+            )}
+          </div>
+        </Card>
+      )}
+    </>
   );
 };
 
