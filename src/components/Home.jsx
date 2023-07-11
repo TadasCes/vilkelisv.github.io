@@ -20,88 +20,72 @@ const Home = ({ config }) => {
   const [error, setError] = useState(
     typeof config === 'undefined' && !config ? noConfigError : null
   );
-  const [loading, setLoading] = useState(true);
   const [data, setData] = useState(dataConfig);
-
-  useEffect(() => {
-    return () => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
-    };
-  }, []);
 
   return (
     <>
       <HelmetProvider>
         <HeadTagEditor />
-        <h4>test</h4>
-        {console.log(loading)}
-        {!loading && (
-          <div className="m-auto h-full w-full">
-            <h4>test2</h4>
-            {error ? (
-              <ErrorPage
-                status={`${error.status}`}
-                title={error.title}
-                subTitle={error.subTitle}
-              />
-            ) : (
-              <>
-                <div ref={mainContainer} className={`  ${bgColor}`}>
-                  <div
-                    id="main-page-container"
-                    className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
-                  >
-                    <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
-                      <div className="grid col-span-6 lg:col-span-4 gap-6 grid-rows-4">
-                        <div className="row-span-3">
-                          <AvatarCard
-                            loading={loading}
-                            data={dataConfig.about}
-                          />
-                        </div>
-                        <div className="row-span-1">
-                          <Skill loading={loading} data={dataConfig.skills} />
-                        </div>
+        <div className="m-auto h-full w-full">
+          <h4>test2</h4>
+          {error ? (
+            <ErrorPage
+              status={`${error.status}`}
+              title={error.title}
+              subTitle={error.subTitle}
+            />
+          ) : (
+            <>
+              <div ref={mainContainer} className={`  ${bgColor}`}>
+                <div
+                  id="main-page-container"
+                  className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
+                    <div className="grid col-span-6 lg:col-span-4 gap-6 grid-rows-4">
+                      <div className="row-span-3">
+                        <AvatarCard loading={loading} data={dataConfig.about} />
                       </div>
-                      <div className="grid col-span-6 lg:col-span-2 gap-6 grid-rows-4">
-                        <div className="row-span-2">
-                          <Experience
-                            loading={loading}
-                            data={dataConfig.experiences}
-                          />
-                        </div>
-                        <div className="row-span-1">
-                          <Education
-                            loading={loading}
-                            data={dataConfig.education}
-                          />
-                        </div>
-                        <div className="row-span-1">
-                          <Certification
-                            loading={loading}
-                            data={dataConfig.certifications}
-                          />
-                        </div>
+                      <div className="row-span-1">
+                        <Skill loading={loading} data={dataConfig.skills} />
                       </div>
                     </div>
-                    <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
-                      <div className="grid col-span-6 gap-6">
-                        <AllProjects loading={loading} data={data.projects} />
+                    <div className="grid col-span-6 lg:col-span-2 gap-6 grid-rows-4">
+                      <div className="row-span-2">
+                        <Experience
+                          loading={loading}
+                          data={dataConfig.experiences}
+                        />
                       </div>
-                    </div>
-                    <div className="grid grid-cols-1 col-span-6 gap-6">
-                      <div className="grid grid-cols-1 gap-6">
-                        <Details loading={loading} data={data.details} />
+                      <div className="row-span-1">
+                        <Education
+                          loading={loading}
+                          data={dataConfig.education}
+                        />
+                      </div>
+                      <div className="row-span-1">
+                        <Certification
+                          loading={loading}
+                          data={dataConfig.certifications}
+                        />
                       </div>
                     </div>
                   </div>
+                  <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
+                    <div className="grid col-span-6 gap-6">
+                      <AllProjects loading={loading} data={data.projects} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 col-span-6 gap-6">
+                    <div className="grid grid-cols-1 gap-6">
+                      <Details loading={loading} data={data.details} />
+                    </div>
+                  </div>
                 </div>
-              </>
-            )}
-          </div>
-        )}
+              </div>
+            </>
+          )}
+        </div>
       </HelmetProvider>
     </>
   );
