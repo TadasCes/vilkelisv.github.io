@@ -97,46 +97,48 @@ const Details = () => {
           <>
             <CardTitle text={'About me'} loading={loading} />
             <CardContent>
-              <div>
-                <span>{details.story}</span>
+              <div className="w-full h-full">
+                <div className="pb-5 pr-20">
+                  <span>{details.story}</span>
+                </div>
+                {details.location && (
+                  <ListItem
+                    icon={<MdLocationOn />}
+                    title="Based in:"
+                    value={details.location}
+                  />
+                )}
+                <ListItem
+                  icon={<AiFillGithub />}
+                  title="GitHub:"
+                  value={details.github}
+                  link={`https://github.com/${details.github}`}
+                />
+                {details.linkedin && (
+                  <ListItem
+                    icon={<FaLinkedin />}
+                    title="LinkedIn:"
+                    value={details.linkedin}
+                    link={`https://www.linkedin.com/in/${details.linkedin}`}
+                  />
+                )}
+                {details?.phone && (
+                  <ListItem
+                    icon={<RiPhoneFill />}
+                    title="Phone:"
+                    value={details.phone}
+                    link={`tel:${details.phone}`}
+                  />
+                )}
+                {details?.email && (
+                  <ListItem
+                    icon={<RiMailFill />}
+                    title="Email:"
+                    value={details.email}
+                    link={`mailto:${details.email}`}
+                  />
+                )}
               </div>
-              {details.location && (
-                <ListItem
-                  icon={<MdLocationOn />}
-                  title="Based in:"
-                  value={details.location}
-                />
-              )}
-              <ListItem
-                icon={<AiFillGithub />}
-                title="GitHub:"
-                value={details.github}
-                link={`https://github.com/${details.github}`}
-              />
-              {details.linkedin?.linkedin && (
-                <ListItem
-                  icon={<FaLinkedin />}
-                  title="LinkedIn:"
-                  value={details.linkedin.linkedin}
-                  link={`https://www.linkedin.com/in/${details.linkedin.linkedin}`}
-                />
-              )}
-              {details?.phone && (
-                <ListItem
-                  icon={<RiPhoneFill />}
-                  title="Phone:"
-                  value={details.phone}
-                  link={`tel:${details.phone}`}
-                />
-              )}
-              {details?.email && (
-                <ListItem
-                  icon={<RiMailFill />}
-                  title="Email:"
-                  value={details.email}
-                  link={`mailto:${details.email}`}
-                />
-              )}
             </CardContent>
           </>
         )}

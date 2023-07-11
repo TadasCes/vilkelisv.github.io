@@ -15,16 +15,17 @@ const dataConfig = {
       Self-learner, curious, team-player with the sense of ownership \n`,
   },
   details: {
-    story:
-      'I have always been a creative person, interested in art, design, illustration, photography and code.',
+    story: `Being incredibly curious person, I've tried myself in a various fields. Graphic design, 
+    illustration, UI/UX, front-end, automation, freelance, sales and more. During my "soul searching" 
+    I've learned many skills and understood myself better. After years of looking what I truly enjoy doing, 
+    I've come to realization, that code is what I enjoy the most. Working on big projects and seeing them
+     grow one day at a time, solving complex problems makes me forget to eat, lose track of time and enjoy myself.
+      With this new knowledge, I've created a new goal for me: to become the best developer I can be. `,
     github: 'vilkelisv',
     phone: '+37062341300',
     email: 'vilkelis.vainius@gmail.com',
     linkedin: 'vainius-vilkelis',
     location: 'Vilnius',
-  },
-  resume: {
-    fileUrl: '', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
     {
@@ -69,6 +70,13 @@ const dataConfig = {
     },
   ],
   experiences: [
+    {
+      company: 'Freelance',
+      position: 'Google AppsScript Automations',
+      from: 'March 2022',
+      to: 'Now',
+      companyLink: '',
+    },
     {
       company: 'Surfshark',
       position: 'Full-stack Automation developer',
@@ -116,7 +124,6 @@ const dataConfig = {
         At first site was semi-static one page website. Basic tailwind styling and configuration was already set up, so I could focus on adding sub-pages, animations, refactoring code and extracting reusable components. 
         For this project I wanted to focus solely on front-end, so there are no real back-end solution. Simple config file was used to provide UI with required data. 
         `,
-      imageUrl: 'https://via.placeholder.com/250x250',
       code: 'https://github.com/VilkelisV/vilkelisv.github.io',
       goal: 'Create a modular and scalable portfolio site with a simple UI with a focus on maintaining clean React code',
       problems: [
@@ -134,81 +141,58 @@ const dataConfig = {
       id: 2,
       title: 'Freelance',
       short: 'Google Workplace automations with AppsScript.',
-      description: `This is the latest project I’ve done. The goal was to create a modular and scalable portfolio site with a simple UI. To save time setting everything from scratch I’ve forked GitProfile project and changed website to my needs.
-        At first site was semi-static one page website. Basic tailwind styling and configuration was already set up, so I could focus on adding sub-pages, animations, refactoring code and extracting reusable components. 
-        For this project I wanted to focus solely on front-end, so there are no real back-end solution. Simple config file was used to provide UI with required data. 
-        `,
-      imageUrl: 'https://via.placeholder.com/250x250',
+      description: `I've always wanted to test myself working as a freelancer. After working a various companies, and acquiring program skills, I've decided to take the leap and try myslef.
+      Having interest in automation, I've found, that it is possible to automate proccesses for Google apps like Sheets, Docs and others. I've learned AppsScript to automate them 
+      and found some clients. Work it self is great, different projects, different problems, having your own schedule is nice. But many things are not nice and I had to learn it the hard way.
+      Consistently looking for new clients, managing them, maintaining projects, having no financial security is not fun. Luckily for me, I've quickly realized, that this is not for me.
+      `,
       code: 'private',
-      goal: 'Create a modular and scalable portfolio site with a simple UI with a focus on maintaining clean React code',
-      problems: [
-        'Project skeleton was forked from Gitprofile. This repository provided with initial setup and some basic code, but lacked functionality.',
-        'Code was not reusable, and mostly copy pasted everywhere.',
-        'Goal was not to make the website as pretty and impressive, but usable, clear and concise. This made website feel bland and lacking the “wow” effect.',
+      projects: [
+        `BulkFileUpload. The script build for automating file upload for a specific project. User creates a file upload folder. When the file is put inside a that folder, scripts reads file data and by file name put it in a dedicated folder. Folder might be nested deep in a folder tree.`,
+        `Image and csv data upload to sheet. A script that prompts user to select a data folder, which must have csv file with a specific project data and an images folder. Then based on specific business logic, data from csv is transferred to sheet. Now based on this new data in sheet, script scans image folder and puts images inside a sheet as an Image object.`,
+        `ReportScript. A client used sheet as a CRM and did a lot of manual work. Labeling, copy and pasting data. Script automates these repetetives movements and when client is ready, there is a button that on click takes specific data and puts it Docs file. Docs file is formatted and converted to pdf file, which is moved to a folder based on category. Then this file is send as an attachment to a specific person.`,
       ],
-      solutions: [
-        'Most of the project skeleton code was refactored, extracted reusable components.',
-        'To keep website simple, yet interesting, I’ve used framer-motion library for various transitions and effects.',
-        'Created sub-pages for projects to showcase what I’ve created so far for job and hobby projects.',
-      ],
+      goal: 'Try myself working as a freelancer.',
     },
     {
       id: 3,
       title: 'Backoffice CRM',
       short:
         'Internal web app to display and manipulate data from the back end.',
-      description: `This is the latest project I’ve done. The goal was to create a modular and scalable portfolio site with a simple UI. To save time setting everything from scratch I’ve forked GitProfile project and changed website to my needs.
-        At first site was semi-static one page website. Basic tailwind styling and configuration was already set up, so I could focus on adding sub-pages, animations, refactoring code and extracting reusable components. 
-        For this project I wanted to focus solely on front-end, so there are no real back-end solution. Simple config file was used to provide UI with required data. 
-        `,
-      imageUrl: 'https://via.placeholder.com/250x250',
+      description: `While working at Fundvest, my main object was updating and maintaining backoffice CRM system. I’ve implemented various system for file upload, user registration, authentication, created many various tables for the data from the server, experimented with UI and libraries.
+      `,
       code: 'private',
-      goal: 'Create a modular and scalable portfolio site with a simple UI with a focus on maintaining clean React code',
-      problems: [
-        'Project skeleton was forked from Gitprofile. This repository provided with initial setup and some basic code, but lacked functionality.',
-        'Code was not reusable, and mostly copy pasted everywhere.',
-        'Goal was not to make the website as pretty and impressive, but usable, clear and concise. This made website feel bland and lacking the “wow” effect.',
-      ],
+      goal: 'Maintain backoffice React web app and create various screens for new sub-projects.',
       solutions: [
-        'Most of the project skeleton code was refactored, extracted reusable components.',
-        'To keep website simple, yet interesting, I’ve used framer-motion library for various transitions and effects.',
-        'Created sub-pages for projects to showcase what I’ve created so far for job and hobby projects.',
+        `Work with back-end and API's.`,
+        `Implemented authentication system, file upload system, registration. Many different screens for different data.`,
+        'Additionaly had to do some work with AWS, wordpress, Flutter.',
       ],
     },
     {
       id: 4,
-      title: 'Youtube api reader',
+      title: 'Youtube API reader',
       short:
         'Small web app to read data from youtube api, store it in mongodb and display in react.',
-      description: `This is the latest project I’ve done. The goal was to create a modular and scalable portfolio site with a simple UI. To save time setting everything from scratch I’ve forked GitProfile project and changed website to my needs.
-        At first site was semi-static one page website. Basic tailwind styling and configuration was already set up, so I could focus on adding sub-pages, animations, refactoring code and extracting reusable components. 
-        For this project I wanted to focus solely on front-end, so there are no real back-end solution. Simple config file was used to provide UI with required data. 
-        `,
-      imageUrl: 'https://via.placeholder.com/250x250',
-      code: 'https://github.com/VilkelisV/vilkelisv.github.io',
+      description: `One of the interview task projects. The goal was to create a web app that give user the ability to provide youtube video id and see video's comments. When id is provided it is sent to the express server. Server checks the MongoDB database for this id, if it was used previously, saved data is returned, if not, the request to the api is made. Required response data is saved to the server and sent back to the React web app.`,
+      code: 'https://github.com/VilkelisV/Youtube-video-comments-provider/tree/master/client',
       goal: 'Create a web app that gets video from youtube by id and displays video comments. This project was a task for one of the job interviews.',
-      problems: [
-        'Project skeleton was forked from Gitprofile. This repository provided with initial setup and some basic code, but lacked functionality.',
-        'Code was not reusable, and mostly copy pasted everywhere.',
-        'Goal was not to make the website as pretty and impressive, but usable, clear and concise. This made website feel bland and lacking the “wow” effect.',
-      ],
       solutions: [
-        'Most of the project skeleton code was refactored, extracted reusable components.',
-        'To keep website simple, yet interesting, I’ve used framer-motion library for various transitions and effects.',
-        'Created sub-pages for projects to showcase what I’ve created so far for job and hobby projects.',
+        `React and MUI for the front-end`,
+        `Node.js and express for the back end`,
+        ` MongoDB for the database`,
+        `UI has a field where user inputs id for the video. The video is fetched from the Google API.`,
+        ` Id sent to a server. Server checks if video was searched before. If yes, it pulls the data from the server. If no, it fetches the data from the API and stores new data to the server.`,
+        `Ui is provided with video data. Here we can see some video meta data and some comments.`,
       ],
     },
     {
       id: 5,
       title: 'Etsy scrapper',
       short: 'Python web scraper to find best sellers.',
-      description: `This is the latest project I’ve done. The goal was to create a modular and scalable portfolio site with a simple UI. To save time setting everything from scratch I’ve forked GitProfile project and changed website to my needs.
-        At first site was semi-static one page website. Basic tailwind styling and configuration was already set up, so I could focus on adding sub-pages, animations, refactoring code and extracting reusable components. 
-        For this project I wanted to focus solely on front-end, so there are no real back-end solution. Simple config file was used to provide UI with required data. 
-        `,
-      imageUrl: 'https://via.placeholder.com/250x250',
+      description: `For personal use I’ve decided to create a bot that scrapes the data from Etsy. The purpose for this bot is to find how many sales of items a shop had and display it in React web app. It was really quick project, so UI was minimalistic, with one input field for the shop name. When the name is provided, it was sent to flask server. Server downloads etsy shop's 'sold' page and goes through paginated data reading what has been sold. When the html section is read, bot find product name and increases the saved value. When scarping is done, the array of projects are sent to web app and it's displayed with a link, image, sold count and product title.`,
       code: 'https://github.com/VilkelisV/vilkelisv.github.io',
-      goal: 'For personal use I’ve decided to create a bot that scrapes the data from Etsy. The purpose for this bot is to find how many sales of items a shop had and display it in React web app.',
+      goal: 'Create a simples python scarping script to check which products are best sellers from a certain shop',
       problems: [
         'No website likes scraping, so I had to come up with some sort of system to avoid api use restrictions to not get timed out from the website.',
         'Not much experience with scrapping and python',
@@ -223,21 +207,17 @@ const dataConfig = {
       id: 6,
       title: 'Twitch widget editor',
       short: 'Niche project. Testing platform for Twitch chat widgets.',
-      description: `This is the latest project I’ve done. The goal was to create a modular and scalable portfolio site with a simple UI. To save time setting everything from scratch I’ve forked GitProfile project and changed website to my needs.
-        At first site was semi-static one page website. Basic tailwind styling and configuration was already set up, so I could focus on adding sub-pages, animations, refactoring code and extracting reusable components. 
-        For this project I wanted to focus solely on front-end, so there are no real back-end solution. Simple config file was used to provide UI with required data. 
-        `,
-      imageUrl: 'https://via.placeholder.com/250x250',
+      description: `For personal use I was creating various Twitch chat widgets. They were used in Streamlabs web app, that had pretty terrible widget code editor, so I’ve decided to create my own platform to create widgets. Whole streamlabs editor is based around api events. When you click an event button, it triggers a Custom event. Chat widget contains event listener for this event, when it's triggered, custom html, css and JS code is embeded to the main widget container.`,
       code: 'https://github.com/VilkelisV/vilkelisv.github.io',
-      goal: 'For personal use I was creating various Twitch chat widgets. They were used in Streamlabs web app, that had pretty terrible widget code editor, so I’ve decided to create my own platform to create widgets.',
+      goal: 'Create a testing enviroment for Twitch widgets.',
       problems: [
-        'I wanted to replicate Streamlabs as much as possible, so I had to do a lot of reverse engineering, logging server responses, figuring what kind of events are used to display widget and trigger different kinds of events.',
-        'Whole project is based around events, which is not that often used Javascript concept, so it took me some time to make them work.',
+        `I wanted to replicate Streamlabs as much as possible, so I had to do a lot of reverse engineering, logging server responses, figuring what kind of events are used to display widget and trigger different kinds of events.`,
+        `Whole project is based around events, which is not that often used Javascript concept, so it took me some time to make them work.`,
       ],
       solutions: [
-        'Minimalistic UI was created with several buttons to invoke different kinds of events. ',
-        'Drop down selection to select which widget I want to see on the screen.',
-        'Library implemented to easily change work screen width, to test widget.',
+        `Minimalistic UI was created with several buttons to invoke different kinds of events.`,
+        `Drop down selection to select which widget I want to see on the screen.`,
+        `Library implemented to easily change work screen width, to test widget.`,
       ],
     },
   ],

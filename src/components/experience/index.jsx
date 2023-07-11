@@ -73,17 +73,17 @@ const Experience = () => {
                   ))}
                 </>
               )}
+              <a
+                href={'https://www.linkedin.com/in/vainius-vilkelis/'}
+                target="_blank"
+                rel="noreferrer"
+                className="flex justify-start px-1 items-center"
+              >
+                <div className="flex-grow font-medium gap-2 flex items-center my-1">
+                  More on: <FaLinkedin size={'24px'} />
+                </div>
+              </a>
             </ol>
-            <a
-              href={'https://www.linkedin.com/in/vainius-vilkelis/'}
-              target="_blank"
-              rel="noreferrer"
-              className="flex justify-start px-1 items-center"
-            >
-              <div className="flex-grow font-medium gap-2 flex items-center my-1">
-                More on: <FaLinkedin size={'24px'} />
-              </div>
-            </a>
           </CardContent>
         </Card>
       )}

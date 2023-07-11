@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { skeleton, truncate } from '../../../helpers/utils';
@@ -129,6 +130,39 @@ export const Project = () => {
     );
   };
 
+  const Subheader = ({ text, big }) => {
+    return (
+      <h5 className="card-title">
+        {loading ? (
+          skeleton({ width: 'w-32', height: 'h-8' })
+        ) : (
+          <span
+            className={`${
+              big ? 'text-4xl opacity-90' : 'text-base-content opacity-70'
+            } `}
+          >
+            {text}
+          </span>
+        )}
+      </h5>
+    );
+  };
+
+  const ListItem = ({ title, items }) => {
+    return (
+      <div className="text-left w-full col-span-2 md:col-span-1">
+        <Subheader text={title} />
+        <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4 pr-10">
+          {items.map((item, index) => (
+            <li className="text-left list-disc pb-3" key={index}>
+              {item}
+            </li>
+          ))}
+        </ol>
+      </div>
+    );
+  };
+
   return (
     <>
       {isVisible && (
@@ -174,20 +208,10 @@ export const Project = () => {
               >
                 <div className="card p-5 pb-16">
                   <div className="mx-3 flex items-center mb-2">
-                    <div className="grid grid-cols-4 gap-6 mb-5">
-                      <div className="col-span-1">
-                        <BtnNavigate title="Back" destinationUrl={'/'} />
-                      </div>
-                      <div className="col-span-3">
-                        <h5 className="text-center card-title">
-                          {loading ? (
-                            skeleton({ width: 'w-40', height: 'h-8' })
-                          ) : (
-                            <span className="text-4xl opacity-90">
-                              {project.title}
-                            </span>
-                          )}
-                        </h5>
+                    <div className="flex items-center">
+                      <BtnNavigate title="Back" destinationUrl={'/'} />
+                      <div className="ml-5">
+                        <Subheader text={project.title} big={true} />
                       </div>
                     </div>
                   </div>
@@ -195,57 +219,55 @@ export const Project = () => {
                     <div className="flex items-left flex-col">
                       <div className="w-full px-5 py-3">
                         <div className="pb-5">
-                          <h5 className="card-title">
-                            {loading ? (
-                              skeleton({ width: 'w-32', height: 'h-8' })
-                            ) : (
-                              <span className={`text-3xl opacity-70`}>
-                                Goal
-                              </span>
-                            )}
-                          </h5>
+                          <Subheader text={'Goal'} />
                           <div>
                             <span>{project.goal}</span>
                           </div>
                         </div>
                         <div className="grid grid-cols-2 pb-5">
-                          <div className="text-left w-full col-span-2 md:col-span-1">
-                            <CardTitle text={'Problems'} />
-                            <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4 pr-10">
-                              {project.problems.map((problem, index) => (
-                                <li
-                                  className="text-left list-disc pb-3"
-                                  key={index}
-                                >
-                                  {problem}
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
-                          <div className="text-left w-full col-span-2 md:col-span-1">
-                            <CardTitle text={'Solutions'} />
-                            <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4 pr-10">
-                              {project.solutions.map((problem, index) => (
-                                <li
-                                  className="text-left list-disc pb-3"
-                                  key={index}
-                                >
-                                  {problem}
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
+                          {project.problems && (
+                            <div className="text-left w-full col-span-2 md:col-span-1">
+                              <ListItem
+                                title="Problems"
+                                items={project.problems}
+                              />
+                            </div>
+                          )}
+                          {project.solutions && (
+                            <div className="text-left w-full col-span-2 md:col-span-1">
+                              <ListItem
+                                title="Solutions"
+                                items={project.solutions}
+                              />
+                            </div>
+                          )}
+                          {project.projects && (
+                            <div className="text-left w-full col-span-2 md:col-span-2">
+                              <ListItem
+                                title="Bigger projects"
+                                items={project.projects}
+                              />
+                            </div>
+                          )}
                         </div>
-                        <div className="col-span-1">
-                          <span className={`text-xl font-semibold opacity-70`}>
-                            Code:{' '}
-                          </span>
-                          <a className="text-blue-500" href={project.code}>
-                            {project.code === 'private' ? 'Private' : 'Link'}
-                          </a>
+                        <div className="col-span-1 mb-5">
+                          <Subheader
+                            text={
+                              <>
+                                <span>
+                                  Code:{' '}
+                                  <a href={project.code}>
+                                    {project.code === 'private'
+                                      ? 'Private'
+                                      : 'Github'}
+                                  </a>
+                                </span>
+                              </>
+                            }
+                          />
                         </div>
                         <div className="col-span-2">
-                          <CardTitle text={'Description'} />
+                          <Subheader text={'Description'} />
                           <div>
                             <span>{project.description}</span>
                           </div>

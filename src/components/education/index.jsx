@@ -50,20 +50,14 @@ const Education = () => {
           <CardTitle text={'Education'} loading={loading} />
           <CardContent>
             <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-              {loading ? (
-                renderSkeleton()
-              ) : (
-                <>
-                  {education.map((item, index) => (
-                    <ListItem
-                      key={index}
-                      time={`${item.from} - ${item.to}`}
-                      degree={item.degree}
-                      institution={item.institution}
-                    />
-                  ))}
-                </>
-              )}
+              {education.map((item, index) => (
+                <ListItem
+                  key={index}
+                  time={`${item.from} - ${item.to}`}
+                  degree={item.degree}
+                  institution={item.institution}
+                />
+              ))}
             </ol>
           </CardContent>
         </Card>
