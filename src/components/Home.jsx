@@ -33,9 +33,9 @@ const Home = ({ config }) => {
 
   return (
     <>
-      <h4>test</h4>
       <HelmetProvider>
         <HeadTagEditor />
+        <h4>test</h4>
         {!loading && (
           <div className="m-auto h-full w-full">
             {error ? (
