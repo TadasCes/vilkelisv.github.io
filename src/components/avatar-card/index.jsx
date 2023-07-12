@@ -12,7 +12,7 @@ const AvatarCard = ({ loading, data }) => {
             <div className={`mb-8 h-96 w-auto rounded`}>
               {
                 <LazyImage
-                  src="./src/assets/profile2.jpg"
+                  src="https://vilkelisv.github.io/src/assets/profile2.jpg"
                   alt={data.name}
                   placeholder={skeleton({
                     width: 'w-full',
