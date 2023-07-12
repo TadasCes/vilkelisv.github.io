@@ -7,14 +7,7 @@ import { cardBgColor } from '../../../assets/style-const';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, easeOut, motion, useInView } from 'framer-motion';
 
-export const ProjectCard = ({ project, projectCardClicked }) => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    return () => {
-      setLoading(false);
-    };
-  }, []);
+export const ProjectCard = ({ loading, project, projectCardClicked }) => {
   const state = {
     project: project,
     isVisible: true,
