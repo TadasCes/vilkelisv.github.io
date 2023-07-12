@@ -25,9 +25,7 @@ const Home = ({ config }) => {
 
   useEffect(() => {
     setData(dataConfig);
-    return () => {
-      setLoading(false);
-    };
+    setLoading(false);
   }, []);
 
   return (
