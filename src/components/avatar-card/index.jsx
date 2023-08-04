@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { skeleton } from '../../helpers/utils';
 import LazyImage from '../lazy-image';
 import { Card } from '../layout/card';
+import profile from '../../assets/profile2.jpg';
 
 const AvatarCard = ({ loading, data }) => {
   return (
@@ -12,7 +13,7 @@ const AvatarCard = ({ loading, data }) => {
             <div className={`mb-8 h-96 w-auto rounded`}>
               {
                 <LazyImage
-                  src="https://vilkelisv.github.io/src/assets/profile2.jpg"
+                  src={profile}
                   alt={data.name}
                   placeholder={skeleton({
                     width: 'w-full',
