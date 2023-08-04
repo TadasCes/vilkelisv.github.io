@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cardBgColor, loadingBgColor } from '../../../assets/style-const';
-import { AnimatePresence, easeOut, motion, useInView } from 'framer-motion';
-import { mainContainer } from '../../Home';
-import { routeVariants } from '../variants';
+import { easeOut, motion } from 'framer-motion';
 
 export const Card = ({ children, loading, cardId, customAnimation }) => {
   const ref = useRef(null);

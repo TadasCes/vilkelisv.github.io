@@ -14,8 +14,8 @@ import AllProjects from './Projects/all-projects';
 import dataConfig from '../../data.configs';
 import { HelmetProvider } from 'react-helmet-async';
 import HeadTagEditor from './head-tag-editor';
+import Contact from './contact';
 
-let mainContainer;
 const Home = ({ config }) => {
   const [error, setError] = useState(
     typeof config === 'undefined' && !config ? noConfigError : null
@@ -42,53 +42,44 @@ const Home = ({ config }) => {
               />
             ) : (
               <>
-                <div ref={mainContainer} className={`  ${bgColor}`}>
+                <div className={`${bgColor}`}>
                   <div
                     id="main-page-container"
-                    className="grid grid-cols-1 lg:grid-cols-6 gap-6 rounded-box"
+                    className="grid grid-cols-1 lg:grid-cols-6 col-span-6 rounded-box gap-6"
                   >
-                    <div className="grid grid-cols-1 lg:grid-cols-6 col-span-6 gap-6">
-                      <div className="grid col-span-6 lg:col-span-4 gap-6 grid-rows-4">
-                        <div className="row-span-3">
-                          <AvatarCard
-                            loading={loading}
-                            data={dataConfig.about}
-                          />
-                        </div>
-                        <div className="row-span-1">
-                          <Skill loading={loading} data={dataConfig.skills} />
-                        </div>
-                      </div>
-                      <div className="grid col-span-6 lg:col-span-2 gap-6 grid-rows-4">
-                        <div className="row-span-2">
-                          <Experience
-                            loading={loading}
-                            data={dataConfig.experiences}
-                          />
-                        </div>
-                        <div className="row-span-1">
-                          <Education
-                            loading={loading}
-                            data={dataConfig.education}
-                          />
-                        </div>
-                        <div className="row-span-1">
-                          <Certification
-                            loading={loading}
-                            data={dataConfig.certifications}
-                          />
-                        </div>
-                      </div>
+                    <div className="col-span-4 row-span-2">
+                      <AvatarCard loading={loading} data={dataConfig.about} />
                     </div>
-                    <div className="grid grid-cols-6 lg:col-span-6 col-span-6 gap-6">
-                      <div className="grid col-span-6 gap-6">
-                        <AllProjects loading={loading} data={data.projects} />
-                      </div>
+
+                    <div className="col-span-2 row-span-2">
+                      <Experience
+                        loading={loading}
+                        data={dataConfig.experiences}
+                      />
                     </div>
-                    <div className="grid grid-cols-1 col-span-6 gap-6">
-                      <div className="grid grid-cols-1 gap-6">
-                        <Details loading={loading} data={data.details} />
-                      </div>
+                    <div className="col-span-2">
+                      <Education
+                        loading={loading}
+                        data={dataConfig.education}
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <Certification
+                        loading={loading}
+                        data={dataConfig.certifications}
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <Skill loading={loading} data={dataConfig.skills} />
+                    </div>
+                    <div className="col-span-6 row-span-2">
+                      <AllProjects loading={loading} data={data.projects} />
+                    </div>
+                    <div className="col-span-3 row-span-2">
+                      <Details loading={loading} data={data.details} />
+                    </div>
+                    <div className="col-span-3 row-span-2">
+                      <Contact loading={loading} data={data.details} />
                     </div>
                   </div>
                 </div>
@@ -149,4 +140,4 @@ Home.propTypes = {
   }).isRequired,
 };
 
-export { Home, mainContainer };
+export { Home };

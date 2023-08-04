@@ -1,48 +1,12 @@
 import { MdLocationOn } from 'react-icons/md';
-import {
-  AiFillGithub,
-  AiFillInstagram,
-  AiFillMediumSquare,
-} from 'react-icons/ai';
-import { SiTwitter } from 'react-icons/si';
-import { CgDribbble } from 'react-icons/cg';
+import { AiFillGithub } from 'react-icons/ai';
 import { RiPhoneFill, RiMailFill } from 'react-icons/ri';
 import {} from 'react';
-import {
-  FaBehanceSquare,
-  FaBuilding,
-  FaDev,
-  FaFacebook,
-  FaGlobe,
-  FaSkype,
-  FaMastodon,
-  FaStackOverflow,
-  FaTelegram,
-  FaLinkedin,
-} from 'react-icons/fa';
+import { FaLinkedin } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { skeleton } from '../../helpers/utils';
 import { Card } from '../layout/card';
-import { useLoadData } from '../../helpers/useLoadData';
 import { CardContent, CardTitle } from '../layout/card/card-components';
-
-const isCompanyMention = (company) => {
-  return company.startsWith('@') && !company.includes(' ');
-};
-
-const companyLink = (company) => {
-  return `https://github.com/${company.substring(1)}`;
-};
-
-const getFormattedMastodonValue = (mastodonValue, isLink) => {
-  const [username, server] = mastodonValue.split('@');
-
-  if (isLink) {
-    return `https://${server}/@${username}`;
-  } else {
-    return `${username}@${server}`;
-  }
-};
 
 const ListItem = ({ icon, title, value, link, skeleton = false }) => {
   return (
@@ -122,22 +86,6 @@ const Details = ({ loading, data }) => {
                         title="LinkedIn:"
                         value={data.linkedin}
                         link={`https://www.linkedin.com/in/${data.linkedin}`}
-                      />
-                    )}
-                    {data.phone && (
-                      <ListItem
-                        icon={<RiPhoneFill />}
-                        title="Phone:"
-                        value={data.phone}
-                        link={`tel:${data.phone}`}
-                      />
-                    )}
-                    {data.email && (
-                      <ListItem
-                        icon={<RiMailFill />}
-                        title="Email:"
-                        value={data.email}
-                        link={`mailto:${data.email}`}
                       />
                     )}
                   </div>
