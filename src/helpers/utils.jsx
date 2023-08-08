@@ -1,5 +1,9 @@
-import colors from '../data/colors.json';
 import { hotjar } from 'react-hotjar';
+
+export const openInNewTab = (url) => {
+  const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+  if (newWindow) newWindow.opener = null;
+};
 
 export const truncate = (str, charCount, useWordBoundary) => {
   if (str.length <= charCount) {
@@ -53,14 +57,6 @@ export const skeleton = ({
       style={style}
     />
   );
-};
-
-export const languageColor = (language) => {
-  if (typeof colors[language] !== 'undefined') {
-    return colors[language].color;
-  } else {
-    return 'gray';
-  }
 };
 
 export const fallbackImage =

@@ -1,6 +1,9 @@
 // gitprofile.config.js
 
 const dataConfig = {
+  links: {
+    linkedin: 'https://www.linkedin.com/in/vainius-vilkelis/',
+  },
   social: {
     linkedin: 'vainius-vilkelis',
     medium: 'itsvaniwill',
@@ -125,6 +128,7 @@ const dataConfig = {
         For this project I wanted to focus solely on front-end, so there are no real back-end solution. Simple config file was used to provide UI with required data. 
         `,
       code: 'https://github.com/VilkelisV/vilkelisv.github.io',
+      status: 'Live',
       goal: 'Create a modular and scalable portfolio site with a simple UI with a focus on maintaining clean React code',
       problems: [
         'Project skeleton was forked from Gitprofile. This repository provided with initial setup and some basic code, but lacked functionality.',
@@ -147,6 +151,7 @@ const dataConfig = {
       Consistently looking for new clients, managing them, maintaining projects, having no financial security is not fun. Luckily for me, I've quickly realized, that this is not for me.
       `,
       code: 'private',
+      status: 'Stopped',
       projects: [
         `BulkFileUpload. The script build for automating file upload for a specific project. User creates a file upload folder. When the file is put inside a that folder, scripts reads file data and by file name put it in a dedicated folder. Folder might be nested deep in a folder tree.`,
         `Image and csv data upload to sheet. A script that prompts user to select a data folder, which must have csv file with a specific project data and an images folder. Then based on specific business logic, data from csv is transferred to sheet. Now based on this new data in sheet, script scans image folder and puts images inside a sheet as an Image object.`,
@@ -162,6 +167,7 @@ const dataConfig = {
       description: `While working at Fundvest, my main object was updating and maintaining backoffice CRM system. I’ve implemented various system for file upload, user registration, authentication, created many various tables for the data from the server, experimented with UI and libraries.
       `,
       code: 'private',
+      status: 'Not maintained',
       goal: 'Maintain backoffice React web app and create various screens for new sub-projects.',
       solutions: [
         `Work with back-end and API's.`,
@@ -176,6 +182,7 @@ const dataConfig = {
         'Small web app to read data from youtube api, store it in mongodb and display in react.',
       description: `One of the interview task projects. The goal was to create a web app that give user the ability to provide youtube video id and see video's comments. When id is provided it is sent to the express server. Server checks the MongoDB database for this id, if it was used previously, saved data is returned, if not, the request to the api is made. Required response data is saved to the server and sent back to the React web app.`,
       code: 'https://github.com/VilkelisV/Youtube-video-comments-provider/tree/master/client',
+      status: 'Not maintained',
       goal: 'Create a web app that gets video from youtube by id and displays video comments. This project was a task for one of the job interviews.',
       solutions: [
         `React and MUI for the front-end`,
@@ -192,6 +199,7 @@ const dataConfig = {
       short: 'Python web scraper to find best sellers.',
       description: `For personal use I’ve decided to create a bot that scrapes the data from Etsy. The purpose for this bot is to find how many sales of items a shop had and display it in React web app. It was really quick project, so UI was minimalistic, with one input field for the shop name. When the name is provided, it was sent to flask server. Server downloads etsy shop's 'sold' page and goes through paginated data reading what has been sold. When the html section is read, bot find product name and increases the saved value. When scarping is done, the array of projects are sent to web app and it's displayed with a link, image, sold count and product title.`,
       code: 'https://github.com/VilkelisV/vilkelisv.github.io',
+      status: 'Not maintained',
       goal: 'Create a simples python scarping script to check which products are best sellers from a certain shop',
       problems: [
         'No website likes scraping, so I had to come up with some sort of system to avoid api use restrictions to not get timed out from the website.',
@@ -209,6 +217,7 @@ const dataConfig = {
       short: 'Niche project. Testing platform for Twitch chat widgets.',
       description: `For personal use I was creating various Twitch chat widgets. They were used in Streamlabs web app, that had pretty terrible widget code editor, so I’ve decided to create my own platform to create widgets. Whole streamlabs editor is based around api events. When you click an event button, it triggers a Custom event. Chat widget contains event listener for this event, when it's triggered, custom html, css and JS code is embeded to the main widget container.`,
       code: 'https://github.com/VilkelisV/vilkelisv.github.io',
+      status: 'Not maintained',
       goal: 'Create a testing enviroment for Twitch widgets.',
       problems: [
         `I wanted to replicate Streamlabs as much as possible, so I had to do a lot of reverse engineering, logging server responses, figuring what kind of events are used to display widget and trigger different kinds of events.`,

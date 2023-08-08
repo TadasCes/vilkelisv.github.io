@@ -1,4 +1,4 @@
-import { skeleton } from '../../helpers/utils';
+import { openInNewTab, skeleton } from '../../helpers/utils';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../layout/card';
@@ -7,6 +7,8 @@ import { useLoadData } from '../../helpers/useLoadData';
 import { CardContent, CardTitle } from '../layout/card/card-components';
 import { FaLinkedin } from 'react-icons/fa';
 import { AiFillInfoCircle } from 'react-icons/ai';
+import { BtnIcon } from '../buttons/btn-icon';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
 const ListItem = ({ time, position, company, companyLink }) => (
   <li className="mb-5 ml-4 grid grid-cols-5 ">
@@ -24,10 +26,9 @@ const ListItem = ({ time, position, company, companyLink }) => (
       </div>
     </div>
     <div className="col-span-1 justify-self-center self-center pb-3">
-      <AiFillInfoCircle
-        size={'32px'}
-        className="hover:scale-105 transition ease-in-out duration-150 hover:cursor-pointer"
-      />
+      <BtnIcon onClick={''} size={'big'}>
+        <MdOutlineKeyboardArrowRight />
+      </BtnIcon>
     </div>
   </li>
 );
@@ -60,7 +61,18 @@ const Experience = ({ loading, data }) => {
     <>
       {!loading && data?.length !== 0 && (
         <Card cardId="experiences">
-          <CardTitle text={'Experience'} loading={loading} />
+          <div className="flex justify-between ">
+            <CardTitle text={'Experience'} loading={loading} />
+            <span className="flex justify-start items-center mr-3 pt-3">
+              <span className="text-slate-300 pr-1">More on:</span>
+              <BtnIcon
+                onClick={() => openInNewTab(dataConfig.links.linkedin)}
+                size={'medium'}
+              >
+                <FaLinkedin />
+              </BtnIcon>
+            </span>
+          </div>
           <CardContent>
             <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4 w-full">
               {loading ? (
@@ -80,16 +92,6 @@ const Experience = ({ loading, data }) => {
                   ))}
                 </>
               )}
-              <a
-                href={'https://www.linkedin.com/in/vainius-vilkelis/'}
-                target="_blank"
-                rel="noreferrer"
-                className="flex justify-start px-1 items-center"
-              >
-                <div className="flex-grow font-medium gap-2 flex items-center my-1">
-                  More on: <FaLinkedin size={'24px'} />
-                </div>
-              </a>
             </ol>
           </CardContent>
         </Card>

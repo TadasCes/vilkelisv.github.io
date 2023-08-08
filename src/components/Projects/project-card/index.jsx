@@ -3,7 +3,7 @@ import LazyImage from '../../lazy-image';
 import { ga, skeleton, truncate } from '../../../helpers/utils';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import PropTypes from 'prop-types';
-import { cardBgColor } from '../../../assets/style-const';
+import { cardBgColor, hoverAnimation } from '../../../assets/style-const';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, easeOut, motion, useInView } from 'framer-motion';
 
@@ -59,7 +59,7 @@ export const ProjectCard = ({ loading, project, projectCardClicked }) => {
       initial={motionConfig.initial}
       animate={motionConfig.animate}
       exit={motionConfig.exit}
-      className="col-span-3 md:col-span-1 hover:scale-105 transition ease-in-out duration-150 shadow-md hover:shadow-lg "
+      className={`col-span-3 md:col-span-1 ${hoverAnimation} shadow-md hover:shadow-lg`}
     >
       <Link
         className={`card  compact cursor-pointer ${cardBgColor} `}

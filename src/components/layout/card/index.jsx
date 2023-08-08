@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { cardBgColor, loadingBgColor } from '../../../assets/style-const';
 import { easeOut, motion } from 'framer-motion';
 
-export const Card = ({ children, loading, cardId, customAnimation }) => {
+export const Card = ({ children, loading, cardId, customAnimation, style }) => {
   const ref = useRef(null);
 
   const [configLoading, setConfigLoading] = useState(true);
@@ -54,12 +54,12 @@ export const Card = ({ children, loading, cardId, customAnimation }) => {
   }, []);
 
   return (
-    <div id={cardId} className="h-full">
+    <div id={cardId} className={`h-full `}>
       {!configLoading && (
         <motion.div
           className={`card shadow-lg compact h-full  ${
             loading ? loadingBgColor : cardBgColor
-          } `}
+          } ${style}`}
           style={{ overflow: 'hidden' }}
           initial={
             customAnimation ? customAnimation.initial : motionConfig.initial
@@ -82,4 +82,5 @@ Card.propTypes = {
   loading: PropTypes.bool,
   cardId: PropTypes.string,
   customAnimation: PropTypes.any,
+  style: PropTypes.string,
 };

@@ -6,6 +6,7 @@ export default {
     textColor: {
       white: '#FFF',
       black: '#000',
+      accent: '#eede02',
     },
     extend: {},
   },

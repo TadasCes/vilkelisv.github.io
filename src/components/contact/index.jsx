@@ -5,6 +5,7 @@ import { skeleton } from '../../helpers/utils';
 import { Card } from '../layout/card';
 import { CardContent, CardTitle } from '../layout/card/card-components';
 import { BtnSimple } from '../buttons/btn-simple';
+import { BaseIcon } from '../icons/base-icon';
 
 const ListItem = ({ icon, title, value, link, skeleton = false }) => {
   return (
@@ -15,7 +16,7 @@ const ListItem = ({ icon, title, value, link, skeleton = false }) => {
       className="flex justify-start px-1 items-center"
     >
       <div className="flex-grow font-medium gap-2 flex items-center my-1">
-        {icon} {title}
+        <BaseIcon size={'small'}>{icon}</BaseIcon> {title}
       </div>
       <div
         className={`${

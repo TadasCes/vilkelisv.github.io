@@ -1,9 +1,16 @@
 import { skeleton } from '../../../../helpers/utils';
 
 /* eslint-disable react/prop-types */
-export const CardTitle = ({ text, loading, big, layoutStyle, textStyle }) => {
+export const CardTitle = ({
+  text,
+  loading,
+  big,
+  layoutStyle,
+  textStyle,
+  center,
+}) => {
   return (
-    <div className="mx-3 pt-3">
+    <div className={`${center ? 'mx-auto' : 'mx-3 pt-3'} ${layoutStyle}`}>
       <h5 className="card-title">
         {loading ? (
           skeleton({ width: 'w-32', height: 'h-8' })
