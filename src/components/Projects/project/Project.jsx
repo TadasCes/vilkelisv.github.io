@@ -209,7 +209,7 @@ export const Project = () => {
                       big={true}
                       center={true}
                     />
-                    <CardContent layoutStyle={'mx-32'}>
+                    <CardContent layoutStyle={'lg:mx-32'}>
                       <span>{project.description}</span>
                     </CardContent>
                   </Card>

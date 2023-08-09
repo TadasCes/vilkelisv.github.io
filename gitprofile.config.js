@@ -33,7 +33,7 @@ const config = {
 
     // Available themes. To remove any theme, exclude from here.
     themes: ['wireframe'],
-    darkTheme: 'wireframe',
+    darkMode: 'false',
 
     // Custom theme
     customTheme: {
