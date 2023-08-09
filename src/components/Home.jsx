@@ -3,7 +3,7 @@ import ErrorPage from './error-page';
 import AvatarCard from './avatar-card';
 import Details from './details';
 import Skill from './skill';
-import Experience from './experience';
+import { Experience } from './experience';
 import Certification from './certification';
 import Education from './education';
 import { noConfigError } from '../helpers/utils';

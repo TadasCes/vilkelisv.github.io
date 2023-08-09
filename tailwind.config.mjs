@@ -13,9 +13,6 @@ export default {
   plugins: [require('daisyui')],
   daisyui: {
     logs: false,
-    themes: [
-      ...config.themeConfig.themes,
-      { procyon: config.themeConfig.customTheme },
-    ],
+    themes: [...config.themeConfig.themes],
   },
 };

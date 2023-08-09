@@ -25,15 +25,10 @@ const ListItem = ({ time, position, company, companyLink }) => (
         </a>
       </div>
     </div>
-    <div className="col-span-1 justify-self-center self-center pb-3">
-      <BtnIcon onClick={''} size={'big'}>
-        <MdOutlineKeyboardArrowRight />
-      </BtnIcon>
-    </div>
   </li>
 );
 
-const Experience = ({ loading, data }) => {
+export const Experience = ({ loading, data }) => {
   const renderSkeleton = () => {
     let array = [];
     for (let index = 0; index < 2; index++) {
@@ -111,5 +106,3 @@ Experience.propTypes = {
   loading: PropTypes.bool,
   data: PropTypes.array,
 };
-
-export default Experience;

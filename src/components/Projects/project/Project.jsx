@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { skeleton, truncate } from '../../../helpers/utils';
@@ -98,9 +97,9 @@ export const Project = () => {
     return (
       <div className="text-left w-full col-span-2 md:col-span-1">
         <Subheader text={title} />
-        <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-8">
+        <ol className="relative border-l colored-list border-base-300 border-opacity-30 my-2 mx-8">
           {items.map((item, index) => (
-            <li className="colored-list text-left list-disc pb-3" key={index}>
+            <li className="text-left list-disc pb-3" key={index}>
               <span>{item}</span>
             </li>
           ))}
@@ -226,4 +225,8 @@ Project.propTypes = {
   }),
   googleAnalytics: PropTypes.object,
   isVisible: PropTypes.bool,
+  title: PropTypes.string,
+  text: PropTypes.string,
+  big: PropTypes.bool,
+  items: PropTypes.array,
 };

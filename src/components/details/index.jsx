@@ -63,7 +63,7 @@ const Details = ({ loading, data }) => {
                 <CardTitle text={'About me'} loading={loading} />
                 <CardContent>
                   <div className="w-full h-full">
-                    <div className="pb-5 pr-20">
+                    <div className="pb-5  mx-8">
                       <span>{data.story}</span>
                     </div>
                     {data.location && (

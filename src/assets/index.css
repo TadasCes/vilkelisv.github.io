@@ -4,8 +4,9 @@
 
 * {
   --main-bg-color: brown;
-  --main-font-color: rgb(24, 24, 24);
+  --main-font-color: #181818;
   --accent-color: #eede02;
+  --accent-scolor: #e3e3ed;
 }
 
 .color-accent {

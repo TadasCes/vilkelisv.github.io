@@ -54,6 +54,27 @@ export const TextListItem = ({ year, name, body }) => (
   </li>
 );
 
+const ListItem = ({ loading, title, items }) => {
+  return (
+    <div className="text-left w-full col-span-2 md:col-span-1">
+      <h5 className="card-title">
+        {loading ? (
+          skeleton({ width: 'w-32', height: 'h-8' })
+        ) : (
+          <span className={`${'text-base-content opacity-70'} `}>{title}</span>
+        )}
+      </h5>
+      <ol className="relative border-l colored-list border-base-300 border-opacity-30 my-2 mx-8">
+        {items.map((item, index) => (
+          <li className="text-left list-disc pb-3" key={index}>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+};
+
 TextListItem.propTypes = {
   year: PropTypes.node,
   name: PropTypes.node,
