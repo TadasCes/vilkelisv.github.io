@@ -144,11 +144,11 @@ export const Project = () => {
                     </CardContent>
                   </Card>
                 </div>
-                <div className="col-span-6 lg:col-span-3 row-span-1">
-                  <Card cardId="project-page-code">
-                    <CardTitle text={'Code'} loading={false} big={false} />
-                    <CardContent layoutStyle={'h-full'}>
-                      {project.code && (
+                {project.code && (
+                  <div className="col-span-6 lg:col-span-3 row-span-1">
+                    <Card cardId="project-page-code">
+                      <CardTitle text={'Code'} loading={false} big={false} />
+                      <CardContent layoutStyle={'h-full'}>
                         <ListItem
                           items={[
                             <li
@@ -169,30 +169,38 @@ export const Project = () => {
                             </li>,
                           ]}
                         />
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
-                <div className="col-span-6 lg:col-span-3 row-span-2">
-                  <Card cardId="project-page-problems">
-                    <CardTitle text={'Problems'} loading={false} big={false} />
-                    <CardContent>
-                      {project.problems && (
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+                {project.problems && (
+                  <div className="col-span-6 lg:col-span-3 row-span-2">
+                    <Card cardId="project-page-problems">
+                      <CardTitle
+                        text={'Problems'}
+                        loading={false}
+                        big={false}
+                      />
+                      <CardContent>
                         <ListItem items={project.problems} />
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
-                <div className="col-span-6 lg:col-span-3 row-span-2">
-                  <Card cardId="project-page-solutions">
-                    <CardTitle text={'Solutions'} loading={false} big={false} />
-                    <CardContent>
-                      {project.solutions && (
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+                {project.solutions && (
+                  <div className="col-span-6 lg:col-span-3 row-span-2">
+                    <Card cardId="project-page-solutions">
+                      <CardTitle
+                        text={'Solutions'}
+                        loading={false}
+                        big={false}
+                      />
+                      <CardContent>
                         <ListItem items={project.solutions} />
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
                 <div className="col-span-6 lg:col-span-6 row-span-1">
                   <Card cardId="project-page-desc" style="py-10">
                     <CardTitle

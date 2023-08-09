@@ -55,6 +55,9 @@ const AvatarCard = ({ loading, data }) => {
                     ~3 years of combined programming experience.
                   </p>
                   <p className={`text-sm mb-2`}>
+                    Looking for Front-end (React) developer role.
+                  </p>
+                  <p className={`text-sm mb-2`}>
                     Interested in everything between automation and
                     illustration.
                   </p>

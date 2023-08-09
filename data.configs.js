@@ -14,6 +14,7 @@ const dataConfig = {
     name: 'Vainius Vilkelis',
     bio: 'Full-stack Javascript developer.',
     story: `~3 years of combined programming experience \n 
+      Looking for Front-end (React) developer role \n
       Interested in everything between automation and illustration <br>\n 
       Self-learner, curious, team-player with the sense of ownership \n`,
   },
